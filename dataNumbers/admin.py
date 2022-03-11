@@ -7,7 +7,6 @@ from django.apps import apps
 # for model in models:
 #     admin.site.register(model)
 
-admin.site.register(User)
 admin.site.register(Telephone)
 admin.site.register(Post)
 admin.site.register(Comment)

@@ -2,17 +2,11 @@ from django.db import models
 
 # Create your models here.
 from django.db.models import Model
+from django.contrib.auth.models import User
 
 NAME_MAX_LENGTH = 50
 PASSWORD_MAX_LENGTH = 20
 EMAIL_MAX_LENGTH = 100
-
-
-class User(Model):
-    user_id = models.AutoField(primary_key=True)
-    user_name = models.CharField(max_length=NAME_MAX_LENGTH, unique=True)
-    password = models.CharField(max_length=PASSWORD_MAX_LENGTH)
-    mail = models.EmailField(max_length=EMAIL_MAX_LENGTH, unique=True)
 
 
 class Telephone(Model):
