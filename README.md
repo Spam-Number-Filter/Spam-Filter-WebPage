@@ -2,5 +2,5 @@
 
 ## DataBase Password
 
-User: root
-Password: @rchLinuxGent00
+User: admin
+Password: admin
