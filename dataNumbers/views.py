@@ -3,9 +3,10 @@ from django.contrib.auth import authenticate
 
 
 # Create your views here.
+from django.template import loader, Context
+from django.views.generic import TemplateView
+
+
 def index(request):
-    user = authenticate(username='Pablito2020', password='adminroot')
-    if user is not None:
-        return HttpResponse("Authenticated! Yay!")
-    else:
-        return HttpResponse("Not authenticated! SadFace")
+    template = loader.get_template('home.html')
+    return HttpResponse(template.render())
