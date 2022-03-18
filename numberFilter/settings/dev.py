@@ -3,8 +3,12 @@ from .settings import *
 DEBUG = True
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'django',
+        'USER': 'django',
+        'PASSWORD': 'secret',
+        'HOST': 'django-postgres',
+        'PORT': '5432',
     }
 }
 
