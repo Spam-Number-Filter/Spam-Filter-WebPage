@@ -2,6 +2,7 @@
   Spam Filter Web Page ☎️
 </h1>
 
+[![Deploy to Heroku](https://github.com/Spam-Number-Filter/Spam-Filter-WebPage/actions/workflows/deploy-heroku.yml/badge.svg)](https://github.com/Spam-Number-Filter/Spam-Filter-WebPage/actions/workflows/deploy-heroku.yml)
 ![](https://img.shields.io/badge/Python-14354C?style=for-the-badge&logo=python&logoColor=whit)
 ![](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white)
 
