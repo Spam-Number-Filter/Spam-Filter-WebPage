@@ -25,12 +25,6 @@ Before accessing the data base (as admin), an admin user must be created. In ord
 $ docker exec -it django python manage.py createsuperuser
 ```
 
-### Dependencies ⚙️
-
-Notice we have a dependencies file for each Docker Compose and Heroku, that is due to `django-heroku` package currently (2022-03-21) down on the pip package manager. This causes errors when configuring docker containers.
-
-Issue will be fixed as soon as the package is available on pip packet manager.
-
 ## Running locally without docker and with sqlite3 💻
 
 To boot up the web page, once inside the python environment, run the command:

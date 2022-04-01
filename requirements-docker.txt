@@ -1,6 +1,0 @@
-Django
-gunicorn
-whitenoise
-psycopg2-binary
-django-widget-tweaks
-django-crispy-forms
