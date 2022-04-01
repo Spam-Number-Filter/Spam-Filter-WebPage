@@ -2,4 +2,5 @@ Django
 gunicorn
 django-heroku
 whitenoise
+django-widget-tweaks
 django-crispy-forms

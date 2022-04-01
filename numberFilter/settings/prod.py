@@ -2,7 +2,7 @@ from .settings import *
 import django_heroku
 import os
 
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ["http://spamnumberfilter.herokuapp.com", "http://spamnumberfilter.herokuapp.com/"]
 
 DATABASES = {
