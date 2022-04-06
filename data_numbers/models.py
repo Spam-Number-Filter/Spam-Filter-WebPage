@@ -1,8 +1,8 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
 from django.db.models import Model
-from django.contrib.auth.models import User
 
 NAME_MAX_LENGTH = 50
 PASSWORD_MAX_LENGTH = 20

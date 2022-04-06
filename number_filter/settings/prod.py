@@ -1,6 +1,8 @@
-from .settings import *
-import django_heroku
 import os
+
+import django_heroku
+
+from .settings import *
 
 DEBUG = True
 ALLOWED_HOSTS = [
