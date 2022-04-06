@@ -15,7 +15,10 @@ class Telephone(Model):
     prefix = models.IntegerField()
 
     class Meta:
-        unique_together = ('phone', 'prefix',)
+        unique_together = (
+            "phone",
+            "prefix",
+        )
 
 
 TITLE_MAX_LENGTH = 30
