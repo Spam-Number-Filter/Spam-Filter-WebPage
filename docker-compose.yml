@@ -13,7 +13,7 @@ services:
   web:
     container_name: 'django'
     environment:
-      DJANGO_SETTINGS_MODULE: 'numberFilter.settings.dev'
+      DJANGO_SETTINGS_MODULE: 'number_filter.settings.dev'
     build: .
     command: /bin/sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     volumes:

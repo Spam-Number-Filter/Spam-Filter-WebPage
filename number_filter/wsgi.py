@@ -1,5 +1,5 @@
 """
-WSGI config for numberFilter project.
+WSGI config for number_filter project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.get("DJANGO_SETTINGS_MODULE", "numberFilter.settings.dev")
+os.environ.get("DJANGO_SETTINGS_MODULE", "number_filter.settings.dev")
 
 application = get_wsgi_application()

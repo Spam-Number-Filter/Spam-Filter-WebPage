@@ -1,5 +1,5 @@
 from django.contrib import admin
-from dataNumbers.models import Telephone, Post, Comment, Category, VoteCategory
+from data_numbers.models import Telephone, Post, Comment, Category, VoteCategory
 
 admin.site.register(Telephone)
 admin.site.register(Post)

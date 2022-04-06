@@ -8,7 +8,7 @@ def main():
     """Run administrative tasks."""
     if os.environ.get("DJANGO_SETTINGS_MODULE") is None:
         os.environ.setdefault(
-            "DJANGO_SETTINGS_MODULE", "numberFilter.settings.settings"
+            "DJANGO_SETTINGS_MODULE", "number_filter.settings.settings"
         )
     try:
         from django.core.management import execute_from_command_line
