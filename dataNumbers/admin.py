@@ -1,11 +1,5 @@
 from django.contrib import admin
-from dataNumbers.models import *
-from django.apps import apps
-
-# Register your models here.
-# models = apps.get_models()
-# for model in models:
-#     admin.site.register(model)
+from dataNumbers.models import Telephone, Post, Comment, Category, VoteCategory
 
 admin.site.register(Telephone)
 admin.site.register(Post)
