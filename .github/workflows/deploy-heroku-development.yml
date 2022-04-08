@@ -1,0 +1,18 @@
+name: Deploy to development Heroku repository
+
+on:
+  push:
+    branches: [ develop ]
+  pull_request:
+    branches: [ develop ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_DEV_API_KEY}}
+          heroku_app_name: ${{secrets.HEROKU_DEV_NAME_REPOSITORY}}
+          heroku_email: ${{secrets.HEROKU_MAIL}}
