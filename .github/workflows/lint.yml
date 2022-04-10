@@ -17,6 +17,7 @@ jobs:
     - name: Install dependencies
       run: |
         pip install pylint pylint-django
+        pip install -r .github/dev-requirements.txt
 
     - name: Lint
       run: |
