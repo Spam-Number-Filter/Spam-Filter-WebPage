@@ -1,0 +1,24 @@
+name: Lint using pylint
+on: [pull_request, push]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - uses: actions/checkout@master
+
+    - name: Setup Python
+      uses: actions/setup-python@v1
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        pip install pylint pylint-django
+
+    - name: Lint
+      run: |
+        export DJANGO_SETTINGS_MODULE=number_filter.settings.dev
+        pylint --load-plugins pylint_django data_numbers number_filter
