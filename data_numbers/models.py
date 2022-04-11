@@ -1,4 +1,5 @@
-from django.contrib.auth.models import User
+""" File that contains all data entities of our project. """
+from django.conf.global_settings import AUTH_USER_MODEL
 from django.db import models
 
 # Create your models here.
@@ -10,6 +11,8 @@ EMAIL_MAX_LENGTH = 100
 
 
 class Telephone(Model):
+    """Telephone model."""
+
     telephone_id = models.AutoField(primary_key=True)
     phone = models.IntegerField()
     prefix = models.IntegerField()
@@ -25,17 +28,20 @@ TITLE_MAX_LENGTH = 30
 
 
 class Post(Model):
+    """Post model."""
+
     post_id = models.AutoField(primary_key=True)
-    creation_user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    creation_user_id = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=TITLE_MAX_LENGTH)
-    # TODO: Put that on documentation
     message = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
     telephone = models.ForeignKey(Telephone, on_delete=models.CASCADE)
 
 
 class Comment(Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    """Comment model, from a post."""
+
+    user_id = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
     post_id = models.ForeignKey(Post, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
     message = models.TextField()
@@ -45,10 +51,14 @@ MAX_CATEGORY_LENGTH = 20
 
 
 class Category(Model):
+    """Category model, from a post."""
+
     type = models.CharField(max_length=MAX_CATEGORY_LENGTH, primary_key=True)
 
 
 class VoteCategory(Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    """VoteCategory model, from a category."""
+
+    user_id = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
     post_id = models.ForeignKey(Post, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
