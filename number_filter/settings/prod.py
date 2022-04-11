@@ -2,9 +2,9 @@ import os
 
 import django_heroku
 
-from .settings import *
+from .base import *
 
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = [
     "http://spamnumberfilter.herokuapp.com",
     "http://spamnumberfilter.herokuapp.com/",
