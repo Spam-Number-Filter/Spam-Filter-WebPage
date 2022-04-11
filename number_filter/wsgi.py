@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.get("DJANGO_SETTINGS_MODULE", "number_filter.settings.dev")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "number_filter.settings.dev")
 
 application = get_wsgi_application()
