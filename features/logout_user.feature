@@ -10,10 +10,7 @@ I want to logout to leave the webpage
     Given An user is logged in the website
     When I logout
     Then I'm viewing that "account" button is not appearing anymore
-    And There is no logged in user
+    And I'm viewing the login button
 
-  Scenario: User logouts from the website and there's no logged in user
-    Given An user is not logged in the website
-    When I try to logout
-    Then I'm viewing that there's no log out button
-    And I can't click on the button
+  Scenario: User can't logout from the website
+    Then There is no log out button
