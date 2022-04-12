@@ -9,9 +9,13 @@ def create_user(context):
 
 @given('I login as user "admin" with password "admin"')
 def login_user_admin_admin(context):
+    login(context, "admin", "admin")
+
+
+def login(context, username, password):
     context.browser.visit(context.get_url("/accounts/login"))
-    context.browser.fill("username", "admin")
-    context.browser.fill("password", "admin")
+    context.browser.fill("username", username)
+    context.browser.fill("password", password)
 
 
 @when("I click on the login button")
@@ -27,19 +31,17 @@ def check_we_are_on_main_page(context):
 
 @given('I login as user "admin" with password "notadmin"')
 def login_as_admin_notadmin(context):
-    raise NotImplementedError(
-        'STEP: Given I login as user "admin" with password "notadmin"'
-    )
+    login(context, "admin", "notadmin")
 
 
 @then("I should see the login page")
 def see_login_page(context):
-    raise NotImplementedError("STEP: Then I should see the login page")
+    assert context.browser.url == context.get_url("/login/")
 
 
 @step("I should see an error message")
 def see_error_message(context):
-    raise NotImplementedError("STEP: And I should see an error message")
+    assert context.browser.is_element_present_by_id("error_message")
 
 
 @step("I should see the logout button on the top right corner of the navbar")
