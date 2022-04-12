@@ -1,0 +1,42 @@
+name: Behavior Tests
+
+on:
+  push:
+    branches:
+      - master
+      - develop
+  pull_request:
+    branches:
+      - master
+      - develop
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.10"
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Install firefox
+        run: |
+          sudo apt-get update
+          sudo apt-get install firefox -y
+      - name: Install tar
+        run: sudo apt-get install tar
+      - name: Download and extract geckodriver
+        run: |
+          wget https://github.com/mozilla/geckodriver/releases/download/v0.31.0/geckodriver-v0.31.0-linux64.tar.gz
+          tar -xvzf geckodriver*
+          chmod +x geckodriver
+          sudo mv geckodriver /usr/local/bin
+      - name: Collect static files
+        run: |
+          python manage.py migrate
+          python manage.py makemigrations
+          python manage.py collectstatic --noinput
+      - name: Test behavior
+        run: python manage.py behave
