@@ -3,3 +3,8 @@ gunicorn
 django-heroku
 whitenoise
 psycopg2-binary
+behave
+behave-django
+splinter
+urllib3
+selenium
