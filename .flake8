@@ -1,3 +1,4 @@
 [flake8]
-ignore = E501, W503
+# F401 and F403 because of the different environments (dev, prod, base) of django
+ignore = E501, W503, F401, F403
 max-line-length = 88
