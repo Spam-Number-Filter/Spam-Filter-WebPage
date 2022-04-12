@@ -292,3 +292,5 @@ fabric.properties
 /css/*
 /jss/*
 staticfiles.json
+admin/*
+js/*
