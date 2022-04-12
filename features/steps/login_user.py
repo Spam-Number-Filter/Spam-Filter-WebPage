@@ -1,25 +1,49 @@
-from behave import given, when, then
-
-@given(u'Exists a user "user" with password "password"')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Given Exists a user "user" with password "password"')
+from behave import given, step, then, when
 
 
-@given(u'I login as user "user" with password "password"')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Given I login as user "user" with password "password"')
+@given('Exists a user "admin" with password "admin"')
+def create_user(context):
+    user = context.db.create_user(username="admin", password="admin")
+    user.save()
 
 
-@when(u'I register restaurant')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: When I register restaurant')
+@given('I login as user "admin" with password "admin"')
+def login_user_admin_admin(context):
+    context.browser.visit(context.get_url("/accounts/login"))
+    context.browser.fill("username", "admin")
+    context.browser.fill("password", "admin")
 
 
-@then(u'I\'m viewing the details page for restaurant by "user"')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Then I\'m viewing the details page for restaurant by "user"')
+@when("I click on the login button")
+def click_login_button(context):
+    form = context.browser.find_by_tag("form").first
+    form.find_by_value("login").click()
 
 
-@then(u'There are 1 restaurants')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Then There are 1 restaurants')
+@then("I should see the main page")
+def check_we_are_on_main_page(context):
+    assert context.browser.url == context.get_url("/")
+
+
+@step("I should see the logout button on the top right corner")
+def button_right_corner(context):
+    raise NotImplementedError(
+        "STEP: And I should see the logout button on the top right corner"
+    )
+
+
+@given('I login as user "admin" with password "notadmin"')
+def login_as_admin_notadmin(context):
+    raise NotImplementedError(
+        'STEP: Given I login as user "admin" with password "notadmin"'
+    )
+
+
+@then("I should see the login page")
+def see_login_page(context):
+    raise NotImplementedError("STEP: Then I should see the login page")
+
+
+@step("I should see an error message")
+def see_error_message(context):
+    raise NotImplementedError("STEP: And I should see an error message")

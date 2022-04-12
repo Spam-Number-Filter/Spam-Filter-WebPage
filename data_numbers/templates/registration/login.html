@@ -20,7 +20,7 @@
                   <h4 class="mt-1 mb-5 pb-1">We are the Spam Number Filter team</h4>
                 </div>
 
-                <form action="{% url 'login' %}" method=POST >
+                <form action="{% url 'login' %}" method=POST>
                   {% csrf_token %}
                   <p>Please login to your account</p>
 
@@ -36,7 +36,7 @@
                   </div>
 
                   <div class="text-center pt-1 mb-5 pb-1">
-                    <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">Log
+                    <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit" value="login">Log
                       in</button>
                     <a class="text-muted" href="#!">Forgot password?</a>
                   </div>
