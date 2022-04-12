@@ -1,5 +1,6 @@
 """ File that conatinas the controller of MVC,
 the code controlling the business logic of the application. """
+import django.core.handlers.wsgi
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
@@ -15,7 +16,8 @@ def index(request):
     return HttpResponse(template.render())
 
 
-def login_user(request):
+def login_user(request: django.core.handlers.wsgi.WSGIRequest):
+    print(request)
     if request.method == "POST":
         username = request.POST["username"]
         password = request.POST["password"]
