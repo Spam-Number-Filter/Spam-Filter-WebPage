@@ -25,13 +25,6 @@ def check_we_are_on_main_page(context):
     assert context.browser.url == context.get_url("/")
 
 
-@step("I should see the logout button on the top right corner")
-def button_right_corner(context):
-    raise NotImplementedError(
-        "STEP: And I should see the logout button on the top right corner"
-    )
-
-
 @given('I login as user "admin" with password "notadmin"')
 def login_as_admin_notadmin(context):
     raise NotImplementedError(
@@ -47,3 +40,9 @@ def see_login_page(context):
 @step("I should see an error message")
 def see_error_message(context):
     raise NotImplementedError("STEP: And I should see an error message")
+
+
+@step("I should see the logout button on the top right corner of the navbar")
+def step_impl(context):
+    context.browser.visit(context.get_url("/"))
+    assert context.browser.is_element_present_by_id("logout")

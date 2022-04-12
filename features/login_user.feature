@@ -10,7 +10,7 @@ Feature: login user
     Given I login as user "admin" with password "admin"
     When I click on the login button
     Then I should see the main page
-    # And I should see the logout button on the top right corner
+    And I should see the logout button on the top right corner of the navbar
 
   #Scenario: login a valid user with invalid credentials
   #  Given I login as user "admin" with password "notadmin"
