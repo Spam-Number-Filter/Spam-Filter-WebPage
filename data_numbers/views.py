@@ -10,6 +10,8 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.template import loader
 
+from data_numbers.forms import UserRegisterForm
+
 
 def index(request):
     """Controller of the index page."""
@@ -36,7 +38,7 @@ def login_user(request: django.core.handlers.wsgi.WSGIRequest):
 
 def register_user(request):
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+        form = UserRegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
