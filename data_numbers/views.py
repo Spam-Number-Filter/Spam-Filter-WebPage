@@ -10,7 +10,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.template import loader
 
-from data_numbers.forms import UserRegisterForm
+from data_numbers.forms import UserRegistrationForm
 
 
 def index(request):
@@ -38,15 +38,13 @@ def login_user(request: django.core.handlers.wsgi.WSGIRequest):
 
 def register_user(request):
     if request.method == "POST":
-        form = UserRegisterForm(request.POST)
+        form = UserRegistrationForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
             return redirect("home")
         else:
-            for msg in form.error_messages:
-                print(form.error_messages[msg])
-                messages.success(request, f"{msg}: {form.error_messages[msg]}")
+            messages.success(request, form.errors)
             return redirect("register")
 
     form = UserCreationForm
