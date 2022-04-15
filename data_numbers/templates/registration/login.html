@@ -4,6 +4,32 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
+<style>
+/* gradient generator: https://mdbootstrap.com/docs/standard/tools/design/gradients/ */
+.gradient-custom-2 {
+  /* fallback for old browsers */
+  background: #667eea;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to left, rgba(102, 126, 234, 1), rgba(118, 75, 162, 1));
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to left, rgba(102, 126, 234, 1), rgba(118, 75, 162, 1))
+}
+
+@media (min-width: 768px) {
+.gradient-form {
+height: 100vh !important;
+}
+}
+@media (min-width: 769px) {
+.gradient-custom-2 {
+border-top-right-radius: .3rem;
+border-bottom-right-radius: .3rem;
+}
+}
+
+</style>
 
 <section class="h-100 gradient-form" style="background-color: #eee;">
   <div class="container py-5 h-100">
