@@ -3,8 +3,9 @@
 </h1>
 
 [![Deploy to Heroku](https://github.com/Spam-Number-Filter/Spam-Filter-WebPage/actions/workflows/deploy-heroku.yml/badge.svg)](https://github.com/Spam-Number-Filter/Spam-Filter-WebPage/actions/workflows/deploy-heroku.yml)
-![](https://img.shields.io/badge/Python-14354C?style=for-the-badge&logo=python&logoColor=whit)
-![](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white)
+[![Behavior Tests](https://github.com/Spam-Number-Filter/Spam-Filter-WebPage/workflows/Behavior%20Tests/badge.svg)](https://github.com/Spam-Number-Filter/Spam-Filter-WebPage/actions/workflows/behavior-tests.yml)
+[![Flake8 Linter](https://github.com/Spam-Number-Filter/Spam-Filter-WebPage/workflows/Flake8%20lint%20check/badge.svg)](https://github.com/Spam-Number-Filter/Spam-Filter-WebPage/actions/workflows/flake8-lint.yml)
+
 
 ## Running locally with docker and postgres 🐳
 
