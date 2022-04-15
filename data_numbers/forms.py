@@ -5,13 +5,11 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
 
-class UserRegistrationForm(forms.ModelForm):
+class UserRegistrationForm(UserCreationForm):
     username = forms.CharField(label="username")
     first_name = forms.CharField(label="first_name", max_length=30)
     last_name = forms.CharField(label="last_name", max_length=30)
     email = forms.EmailField(label="email")
-    password1 = forms.CharField(label="password1", widget=forms.PasswordInput)
-    password2 = forms.CharField(label="password2", widget=forms.PasswordInput)
 
     def clean_email(self):
         email = self.cleaned_data["email"]
@@ -45,13 +43,6 @@ class UserRegistrationForm(forms.ModelForm):
         if not any(char.isdigit() for char in password):
             raise ValidationError("Password must contain at least 1 digit")
         return password
-
-    def clean_password2(self):
-        password1 = self.cleaned_data.get("password1")
-        password2 = self.cleaned_data.get("password2")
-        if password1 and password2 and password1 != password2:
-            raise ValidationError("Passwords don't match")
-        return password2
 
     class Meta:
         model = User
