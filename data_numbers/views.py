@@ -29,7 +29,7 @@ def login_user(request: django.core.handlers.wsgi.WSGIRequest):
             login(request, user)
             return redirect("/")
         else:
-            messages.success(request, ("There was an error logging in"))
+            messages.error(request, ("There was an error logging in"))
             return redirect("login")
     else:
         print(request)
@@ -44,7 +44,7 @@ def register_user(request):
             login(request, user)
             return redirect("home")
         else:
-            messages.success(request, form.errors)
+            messages.error(request, form.errors)
             return redirect("register")
 
     form = UserCreationForm
