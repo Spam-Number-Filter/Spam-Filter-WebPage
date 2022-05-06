@@ -3,7 +3,7 @@ and which view should be run when they are requested. """
 from django.urls import include, path
 from django.views.generic import TemplateView
 
-from data_numbers.views import login_user, register_user
+from data_numbers.views import edit_username, login_user, register_user
 
 urlpatterns = [
     path("accounts/", include("django.contrib.auth.urls")),
@@ -15,4 +15,10 @@ urlpatterns = [
         TemplateView.as_view(template_name="profile.html"),
         name="profile",
     ),
+    path(
+        "accounts/profile/edit-profile/",
+        TemplateView.as_view(template_name="edit_username.html"),
+        name="edit_username",
+    ),
+    path("edit-profile/", edit_username, name="submit_edit_username"),
 ]

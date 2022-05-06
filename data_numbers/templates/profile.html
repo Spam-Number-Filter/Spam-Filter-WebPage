@@ -3,6 +3,11 @@
 
 {% block title %}Login{% endblock %}
 
+{% block style %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+
 {% block content %}
 
     {% if user.is_authenticated %}
@@ -16,9 +21,18 @@
                                     <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"
                                          class="rounded-circle" width="150">
                                     <div class="mt-3">
-                                        <h4>
-                                            {{ user.username }}
-                                        </h4>
+                                        <div class="username_and_edit_button">
+                                            <h4 class="username_on_account">
+                                                {{ user.username }}
+                                            </h4>
+                                            <button class="edit_username_button" id="edit_username_button" name="edit_username_button">
+                                                <a href="{% url 'edit_username' %}">
+                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                </a>
+
+                                            </button>
+
+                                        </div>
                                         <p class="text-secondary mb-1">Basic number filterer</p>
                                         <p class="text-muted font-size-sm">
                                         </p>

@@ -3,7 +3,7 @@ the code controlling the business logic of the application. """
 import django.core.handlers.wsgi
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.http import HttpResponse
 
 # Create your views here.
@@ -53,3 +53,15 @@ def register_user(request):
         template_name="registration/register.html",
         context={"form": form},
     )
+
+
+def edit_username(request):
+    if request.method == "POST":
+        user = request.user
+        new_username = request.POST["username"]
+        user.username = new_username
+        user.save()
+        return redirect("profile")
+    else:
+        print(request)
+        return render(request, "profile.html", {})

@@ -1,0 +1,44 @@
+<!-- templates/edit_username.html-->
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block style %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/edit_username.css' %}">
+{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <div class="container">
+        <div class="main-body">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex flex-column align-items-center text-center">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"
+                             class="rounded-circle" width="150">
+                        <div class="mt-3">
+                            <div class="edit_username_form_div">
+                                {% if user.is_authenticated %}
+                                    <form action="{% url 'submit_edit_username' %}" method="post">
+                                        {% csrf_token %}
+                                        <input type="text" id="username" name="username"><br>
+                                        <input type="submit" value="Submit" id="submit_button">
+                                    </form>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    {% else %}
+        {#    Error alert when not authenticated#}
+        <div class="alert alert-danger alert-dismissible d-flex align-items-center fade show">
+            <i class="bi-exclamation-octagon-fill"></i>
+            <strong class="mx-2">Error!</strong> Log in before accessing your account.
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    {% endif %}
+{% endblock %}
