@@ -10,7 +10,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.template import loader
 
-from data_numbers.forms import UserRegistrationForm
+from data_numbers.forms import ModifyUsernameForm, UserRegistrationForm
 
 
 def index(request):
@@ -55,12 +55,26 @@ def register_user(request):
     )
 
 
+# def edit_username(request):
+#     if request.method == "POST":
+#         user = request.user
+#         new_username = request.POST["username"]
+#         user.username = new_username
+#         user.save()
+#         return redirect("profile")
+#     else:
+#         print(request)
+#         return render(request, "profile.html", {})
 def edit_username(request):
     if request.method == "POST":
-        user = request.user
-        new_username = request.POST["username"]
-        user.username = new_username
-        user.save()
+        form = ModifyUsernameForm(request.POST)
+        if form.is_valid():
+            user = request.user
+            user.username = form.modify_username()
+            user.save()
+        else:
+            messages.success(request, form.errors)
+            return redirect("edit_username")
         return redirect("profile")
     else:
         print(request)

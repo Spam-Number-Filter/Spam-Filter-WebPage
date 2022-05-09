@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib import messages
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
@@ -53,4 +53,20 @@ class UserRegistrationForm(UserCreationForm):
             "last_name",
             "password1",
             "password2",
+        ]
+
+
+class ModifyUsernameForm(UserChangeForm):
+    username = forms.CharField(label="username")
+
+    def modify_username(self):
+        username = self.cleaned_data["username"]
+        if User.objects.filter(username=username).exists():
+            raise ValidationError("Username already exists")
+        return username
+
+    class Meta:
+        model = User
+        fields = [
+            "username",
         ]

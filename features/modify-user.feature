@@ -15,3 +15,5 @@ Feature: modify user
     And I'm viewing the submit button "submit_button"
     And I fill the "username" input with the new username "modified_username"
     And I press "submit_button" button
+
+
