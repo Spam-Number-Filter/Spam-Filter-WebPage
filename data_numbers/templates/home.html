@@ -4,36 +4,53 @@
 {% block style %}
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
-    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet"/>
+    <script>
+        $(function () {
+            $("#TelephoneNumberPrefix").autocomplete({
+                source: ['1', '34', '25', '43'],
+                minLength: 0,
+            });
+        });
+
+        $(function () {
+            $("#TelephoneNumberText").autocomplete({
+                source: ['603709315', '666666666'],
+                minLength: 3,
+            });
+        });
+
+    </script>
 {% endblock %}
 {% block content %}
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="author" content="colorlib.com">
+    <html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="author" content="colorlib.com">
 
-  </head>
-  <body>
+    </head>
+    <body>
     <div class="s01">
-      <form>
-        <fieldset>
-          <legend>Spam Number Filter</legend>
-        </fieldset>
-        <div class="inner-form">
-          <div class="input-field first-wrap">
-            <input id="TelephoneNumberPrefix" type="text" placeholder="Number prefix here" />
-          </div>
-          <div class="input-field second-wrap">
-            <input id="TelephoneNumberText" type="text" placeholder="Telephone number here" />
-          </div>
-          <div class="input-field third-wrap">
-            <button class="btn-search" type="button">Search</button>
-          </div>
-        </div>
-      </form>
+        <form>
+            <fieldset>
+                <legend>Spam Number Filter</legend>
+            </fieldset>
+            <div class="inner-form">
+                <div class="input-field first-wrap">
+                    <input id="TelephoneNumberPrefix" type="text" placeholder="Number prefix here"/>
+                </div>
+                <div class="input-field second-wrap">
+                    <input id="TelephoneNumberText" type="text" placeholder="Telephone number here"/>
+                </div>
+                <div class="input-field third-wrap">
+                    <button class="btn-search" type="button">Search</button>
+                </div>
+            </div>
+        </form>
     </div>
-  </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
-</html>
+    </body>
+    </html>
 {% endblock %}
