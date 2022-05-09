@@ -50,6 +50,17 @@ class Comment(Model):
 MAX_CATEGORY_LENGTH = 20
 
 
+class Likes(Model):
+    user_id = models.ForeignKey(AUTH_USER_MODEL)
+    post_id = models.ForeignKey(Post)
+
+    class Meta:
+        unique_together = (
+            "user_id",
+            "post_id",
+        )
+
+
 class Category(Model):
     """Category model, from a post."""
 
