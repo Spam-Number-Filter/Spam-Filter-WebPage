@@ -1,7 +1,9 @@
 from django import forms
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.contrib.auth.models import User
+from django.forms import ModelForm
 
+from data_numbers.models import Post
 from data_numbers.validation.email_validation import valid_email
 from data_numbers.validation.first_name_validation import valid_first_name
 from data_numbers.validation.last_name_validation import valid_last_name
@@ -62,6 +64,10 @@ class ModifyUsernameForm(UserChangeForm):
 
     class Meta:
         model = User
-        fields = [
-            "username",
-        ]
+        fields = ["username"]
+
+
+class PostForm(ModelForm):
+    class Meta:
+        model = Post
+        exclude = ("post_id", "user_id", "date", "telephone")

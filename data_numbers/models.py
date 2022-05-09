@@ -18,10 +18,7 @@ class Telephone(Model):
     prefix = models.IntegerField()
 
     class Meta:
-        unique_together = (
-            "phone",
-            "prefix",
-        )
+        unique_together = ("phone", "prefix")
 
 
 TITLE_MAX_LENGTH = 30
@@ -31,10 +28,12 @@ class Post(Model):
     """Post model."""
 
     post_id = models.AutoField(primary_key=True)
-    creation_user_id = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=TITLE_MAX_LENGTH)
     message = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
+    telephone_prefix = models.IntegerField()
+    telephone_number = models.IntegerField()
     telephone = models.ForeignKey(Telephone, on_delete=models.CASCADE)
 
 

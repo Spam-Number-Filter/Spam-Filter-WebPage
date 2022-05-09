@@ -9,8 +9,10 @@ from django.http import HttpResponse
 # Create your views here.
 from django.shortcuts import redirect, render
 from django.template import loader
+from django.views.generic import CreateView
 
-from data_numbers.forms import ModifyUsernameForm, UserRegistrationForm
+from data_numbers.forms import ModifyUsernameForm, PostForm, UserRegistrationForm
+from data_numbers.models import Post, Telephone
 
 
 def index(request):
@@ -69,3 +71,20 @@ def edit_username(request):
     else:
         print(request)
         return render(request, "profile.html", {})
+
+
+class PostCreate(CreateView):
+    model = Post
+    form_class = PostForm
+    template_name = "form.html"
+
+    def form_valid(self, form):
+        form.instance.user_id = self.request.user
+        form.instance.telephone = self.getPostCreationTelephone(form)
+        return super(PostCreate, self).form_valid(form)
+
+    def getPostCreationTelephone(self, form):
+        prefix = form.cleaned_data["telephone_prefix"]
+        number = form.cleaned_data["telephone_number"]
+        telephone = Telephone.objects.create(prefix=prefix, phone=number)
+        return Telephone.objects.get(telephone_id=telephone.telephone_id)
