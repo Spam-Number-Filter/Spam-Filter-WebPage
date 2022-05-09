@@ -22,7 +22,7 @@ urlpatterns = [
     ),
     path("edit-profile/", edit_username, name="submit_edit_username"),
     path(
-        "/site-policy/privacy/",
+        "site-policy/privacy/",
         TemplateView.as_view(template_name="privacy.html"),
         name="privacy",
     ),
