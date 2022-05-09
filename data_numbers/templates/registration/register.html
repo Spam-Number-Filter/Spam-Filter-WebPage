@@ -116,7 +116,7 @@
     <body>
     <div class="signup-form">
         <form action="{% url 'register' %}" method="post">
-            {%  csrf_token %}
+            {% csrf_token %}
             <h2>Create Account</h2>
             <p class="lead">It's free and hardly takes more than 30 seconds.</p>
             <div class="form-group">
@@ -128,13 +128,15 @@
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                    <input type="text" class="form-control" name="first_name" placeholder="First name" required="required">
+                    <input type="text" class="form-control" name="first_name" placeholder="First name"
+                           required="required">
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                    <input type="text" class="form-control" name="last_name" placeholder="Last name" required="required">
+                    <input type="text" class="form-control" name="last_name" placeholder="Last name"
+                           required="required">
                 </div>
             </div>
             <div class="form-group">
@@ -147,7 +149,8 @@
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                    <input type="password" class="form-control" name="password1" placeholder="Password" required="required">
+                    <input type="password" class="form-control" name="password1" placeholder="Password"
+                           required="required">
                 </div>
             </div>
             <div class="form-group">
@@ -163,8 +166,9 @@
             <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-block btn-lg" value="signup">Sign Up</button>
             </div>
-            <p class="small text-center">By clicking the Sign Up button, you agree to our <br><a href="/site-policy/terms">Terms &amp;
-                Conditions</a>, and <a href="/site-policy/privacy">Privacy Policy</a>.</p>
+            <p class="small text-center">By clicking the Sign Up button, you agree to our <br><a
+                    href="/site-policy/terms/">Terms &amp;
+                Conditions</a>, and <a href="/site-policy/privacy/">Privacy Policy</a>.</p>
         </form>
         <div class="text-center">Already have an account? <a href="/login/">Login here</a>.</div>
     </div>
