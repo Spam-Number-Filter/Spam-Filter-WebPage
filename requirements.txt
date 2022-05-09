@@ -8,3 +8,5 @@ behave-django
 splinter
 urllib3
 selenium
+django-crispy-forms
+
