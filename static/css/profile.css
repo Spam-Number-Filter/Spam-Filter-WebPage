@@ -1,1 +1,21 @@
 @import url('base.css');
+.edit_username_button {
+    border: none;
+    outline: none;
+    background: none;
+    color: initial;
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: menulist-button;
+    text-decoration: none;
+}
+
+/*align-items-center justify-content-center pb-4*/
+.username_and_edit_button {
+    display: flex;
+    justify-content: center;
+}
+
+.username_on_account{
+    align-content: center;
+}

@@ -10,7 +10,6 @@ from data_numbers.validation.last_name_validation import valid_last_name
 from data_numbers.validation.password_validation import valid_password
 from data_numbers.validation.username_validation import valid_username
 
-
 class UserRegistrationForm(UserCreationForm):
     username = forms.CharField(label="username")
     first_name = forms.CharField(label="first_name", max_length=30)
