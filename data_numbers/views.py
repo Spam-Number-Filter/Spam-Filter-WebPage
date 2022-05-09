@@ -3,7 +3,7 @@ the code controlling the business logic of the application. """
 import django.core.handlers.wsgi
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.forms import UserChangeForm, UserCreationForm
+from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponse
 
 # Create your views here.
