@@ -26,4 +26,9 @@ urlpatterns = [
         TemplateView.as_view(template_name="privacy.html"),
         name="privacy",
     ),
+    path(
+        "site-policy/terms/",
+        TemplateView.as_view(template_name="terms.html"),
+        name="terms",
+    ),
 ]
