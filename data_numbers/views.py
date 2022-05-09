@@ -1,4 +1,4 @@
-""" File that conatinas the controller of MVC,
+""" File that contains the controller of MVC,
 the code controlling the business logic of the application. """
 import django.core.handlers.wsgi
 from django.contrib import messages
@@ -55,16 +55,6 @@ def register_user(request):
     )
 
 
-# def edit_username(request):
-#     if request.method == "POST":
-#         user = request.user
-#         new_username = request.POST["username"]
-#         user.username = new_username
-#         user.save()
-#         return redirect("profile")
-#     else:
-#         print(request)
-#         return render(request, "profile.html", {})
 def edit_username(request):
     if request.method == "POST":
         form = ModifyUsernameForm(request.POST)
