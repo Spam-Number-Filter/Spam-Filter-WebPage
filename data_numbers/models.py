@@ -51,8 +51,8 @@ MAX_CATEGORY_LENGTH = 20
 
 
 class Likes(Model):
-    user_id = models.ForeignKey(AUTH_USER_MODEL)
-    post_id = models.ForeignKey(Post)
+    user_id = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.PROTECT)
+    post_id = models.ForeignKey(Post, on_delete=models.PROTECT)
 
     class Meta:
         unique_together = (

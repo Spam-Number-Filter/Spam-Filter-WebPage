@@ -43,4 +43,9 @@ urlpatterns = [
     path("api/get_numbers/", get_numbers, name="get_places"),
     # Post details
     path("posts/<int:pk>", PostDetail.as_view(), name="post_detail"),
+    path(
+        "trendy/",
+        TemplateView.as_view(template_name="trendy.html"),
+        name="trendy",
+    ),
 ]
