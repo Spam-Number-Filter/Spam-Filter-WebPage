@@ -3,7 +3,14 @@ and which view should be run when they are requested. """
 from django.urls import include, path
 from django.views.generic import TemplateView
 
-from data_numbers.views import PostCreate, edit_username, login_user, register_user
+from data_numbers.views import (
+    PostCreate,
+    edit_username,
+    get_places,
+    get_prefixes,
+    login_user,
+    register_user,
+)
 
 urlpatterns = [
     path("accounts/", include("django.contrib.auth.urls")),
@@ -32,4 +39,6 @@ urlpatterns = [
         TemplateView.as_view(template_name="terms.html"),
         name="terms",
     ),
+    path("api/get_prefixes/", get_prefixes, name="get_prefixes"),
+    path("api/get_places/", get_places, name="get_places"),
 ]

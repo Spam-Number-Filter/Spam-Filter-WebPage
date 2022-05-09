@@ -9,7 +9,19 @@
     <script>
         $(function () {
             $("#TelephoneNumberPrefix").autocomplete({
-                source: ['1', '34', '25', '43'],
+                source: function(request, response) {
+                    $.ajax({
+                        url: 'api/get_prefixes',
+                        type: 'GET',
+                        data: {
+                            prefix: request.term,
+                        },
+                        success: function( data ) {
+                            console.log(data.value);
+                            response(data.serializeArray());
+                        },
+                        })
+                },
                 minLength: 0,
             });
         });

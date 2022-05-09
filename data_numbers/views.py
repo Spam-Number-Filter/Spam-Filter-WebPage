@@ -1,5 +1,7 @@
 """ File that contains the controller of MVC,
 the code controlling the business logic of the application. """
+import json
+
 import django.core.handlers.wsgi
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
@@ -88,3 +90,17 @@ class PostCreate(CreateView):
         number = form.cleaned_data["telephone_number"]
         telephone = Telephone.objects.create(prefix=prefix, phone=number)
         return Telephone.objects.get(telephone_id=telephone.telephone_id)
+
+
+def get_prefixes(request):
+    try:
+        prefix = request.GET["prefix"]
+        prefixes = Telephone.objects.filter(prefix__startswith=prefix)
+        print(prefixes)
+        return HttpResponse(json.dumps([p.prefix for p in prefixes]))
+    except Exception as e:
+        return HttpResponse(f"Error: ${e}")
+
+
+def get_places(request):
+    return
