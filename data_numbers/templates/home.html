@@ -1,23 +1,39 @@
 <!-- templates/home.html-->
 {% extends 'base.html' %}
 {% block title %}Home{% endblock %}
+{% block style %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
+{% endblock %}
 {% block content %}
-<form class="row domain-search bg-pblue">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
-                <h2 class="form-title">Find Your <strong>Dream Domain</strong></h2>
-                <p>Search for your dream domain now</p>
-            </div>
-            <div class="col-md-9">
-                <div class="input-group">
-                    <input type="search" class="form-control">
-                    <span class="input-group-addon"><input type="submit" value="Search" class="btn btn-primary"></span>
-                </div>
-                <p>.com <strong>$8.95</strong>.net <strong>$7.95</strong>.org <strong>$9.95</strong>.club
-                    <strong>$0.99</strong></p>
-            </div>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="colorlib.com">
+
+  </head>
+  <body>
+    <div class="s01">
+      <form>
+        <fieldset>
+          <legend>Spam Number Filter</legend>
+        </fieldset>
+        <div class="inner-form">
+          <div class="input-field first-wrap">
+            <input id="TelephoneNumberPrefix" type="text" placeholder="Number prefix here" />
+          </div>
+          <div class="input-field second-wrap">
+            <input id="TelephoneNumberText" type="text" placeholder="Telephone number here" />
+          </div>
+          <div class="input-field third-wrap">
+            <button class="btn-search" type="button">Search</button>
+          </div>
         </div>
+      </form>
     </div>
-</form>
+  </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>
 {% endblock %}
