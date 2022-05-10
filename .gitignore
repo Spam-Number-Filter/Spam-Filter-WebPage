@@ -295,3 +295,4 @@ staticfiles.json
 admin/*
 js/*
 favicon*
+/images/*
