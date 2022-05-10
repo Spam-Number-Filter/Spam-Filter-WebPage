@@ -1,5 +1,8 @@
 {% extends "base.html" %}
-{% load static %}
+{% block style %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock %}
 {% load crispy_forms_tags %}
 
 {% block content %}

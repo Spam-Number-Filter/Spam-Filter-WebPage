@@ -78,7 +78,7 @@ def edit_username(request):
 class PostCreate(CreateView):
     model = Post
     form_class = PostForm
-    template_name = "form.html"
+    template_name = "post/post_creation.html"
 
     def form_valid(self, form):
         form.instance.user_id = self.request.user

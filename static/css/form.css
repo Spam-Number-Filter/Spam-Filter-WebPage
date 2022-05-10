@@ -1,3 +1,10 @@
-.control-group{
-    width:100%
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    margin-bottom: 60px; /* Margin bottom by footer height */
+    color: #999;
+    background: #f5f5f5;
+    font-family: 'Roboto', sans-serif;
 }
