@@ -96,11 +96,15 @@ def get_prefixes(request):
     try:
         prefix = request.GET["prefix"]
         prefixes = Telephone.objects.filter(prefix__startswith=prefix)
-        print(prefixes)
         return HttpResponse(json.dumps([p.prefix for p in prefixes]))
     except Exception as e:
         return HttpResponse(f"Error: ${e}")
 
 
-def get_places(request):
-    return
+def get_numbers(request):
+    try:
+        number = request.GET["number"]
+        numbers = Telephone.objects.filter(phone__startswith=number)
+        return HttpResponse(json.dumps([p.phone for p in numbers]))
+    except Exception as e:
+        return HttpResponse(f"Error: ${e}")

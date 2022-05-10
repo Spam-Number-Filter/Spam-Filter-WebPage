@@ -9,18 +9,22 @@
     <script>
         $(function () {
             $("#TelephoneNumberPrefix").autocomplete({
-                source: function(request, response) {
+                source: function (request, response) {
                     $.ajax({
                         url: 'api/get_prefixes',
                         type: 'GET',
                         data: {
                             prefix: request.term,
                         },
-                        success: function( data ) {
-                            console.log(data.value);
-                            response(data.serializeArray());
+                        success: function (data) {
+                            response( $.map( JSON.parse(data), function( item ) {
+                                return {
+                                    label: item,
+                                    value: item
+                                }
+                            }));
                         },
-                        })
+                    })
                 },
                 minLength: 0,
             });
@@ -28,7 +32,23 @@
 
         $(function () {
             $("#TelephoneNumberText").autocomplete({
-                source: ['603709315', '666666666'],
+                source: function (request, response) {
+                    $.ajax({
+                        url: 'api/get_numbers',
+                        type: 'GET',
+                        data: {
+                            number: request.term,
+                        },
+                        success: function (data) {
+                            response( $.map( JSON.parse(data), function( item ) {
+                                return {
+                                    label: item,
+                                    value: item
+                                }
+                            }));
+                        },
+                    })
+                },
                 minLength: 3,
             });
         });

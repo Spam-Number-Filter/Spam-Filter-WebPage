@@ -6,7 +6,7 @@ from django.views.generic import TemplateView
 from data_numbers.views import (
     PostCreate,
     edit_username,
-    get_places,
+    get_numbers,
     get_prefixes,
     login_user,
     register_user,
@@ -40,5 +40,5 @@ urlpatterns = [
         name="terms",
     ),
     path("api/get_prefixes/", get_prefixes, name="get_prefixes"),
-    path("api/get_places/", get_places, name="get_places"),
+    path("api/get_numbers/", get_numbers, name="get_places"),
 ]
