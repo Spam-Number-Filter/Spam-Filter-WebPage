@@ -11,7 +11,7 @@ from django.http import HttpResponse
 # Create your views here.
 from django.shortcuts import redirect, render
 from django.template import loader
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView
 
 from data_numbers.forms import ModifyUsernameForm, PostForm, UserRegistrationForm
 from data_numbers.models import Post, Telephone
@@ -90,6 +90,11 @@ class PostCreate(CreateView):
         number = form.cleaned_data["telephone_number"]
         telephone = Telephone.objects.create(prefix=prefix, phone=number)
         return Telephone.objects.get(telephone_id=telephone.telephone_id)
+
+
+class PostDetail(DetailView):
+    model = Post
+    template_name = "post/post_detail.html"
 
 
 def get_prefixes(request):

@@ -4,6 +4,7 @@ from django.db import models
 
 # Create your models here.
 from django.db.models import Model
+from django.urls import reverse
 
 NAME_MAX_LENGTH = 50
 PASSWORD_MAX_LENGTH = 20
@@ -32,6 +33,9 @@ class Post(Model):
     telephone_prefix = models.IntegerField()
     telephone_number = models.IntegerField()
     telephone = models.ForeignKey(Telephone, on_delete=models.CASCADE)
+
+    def get_absolute_url(self):
+        return reverse("post_detail", kwargs={"pk": self.pk})
 
 
 class Comment(Model):
