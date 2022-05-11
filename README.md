@@ -2,9 +2,10 @@
   Spam Filter Web Page ☎️
 </h1>
 
-[![Deploy to Heroku](https://github.com/Spam-Number-Filter/Spam-Filter-WebPage/actions/workflows/deploy-heroku.yml/badge.svg)](https://github.com/Spam-Number-Filter/Spam-Filter-WebPage/actions/workflows/deploy-heroku.yml)
-[![Behavior Tests](https://github.com/Spam-Number-Filter/Spam-Filter-WebPage/workflows/Behavior%20Tests/badge.svg)](https://github.com/Spam-Number-Filter/Spam-Filter-WebPage/actions/workflows/behavior-tests.yml)
 [![Flake8 Linter](https://github.com/Spam-Number-Filter/Spam-Filter-WebPage/workflows/Flake8%20lint%20check/badge.svg)](https://github.com/Spam-Number-Filter/Spam-Filter-WebPage/actions/workflows/flake8-lint.yml)
+[![Unit Tests](https://github.com/Spam-Number-Filter/Spam-Filter-WebPage/actions/workflows/unit-tests.yml/badge.svg)](https://github.com/Spam-Number-Filter/Spam-Filter-WebPage/actions/workflows/unit-tests.yml)
+[![Behavior Tests](https://github.com/Spam-Number-Filter/Spam-Filter-WebPage/workflows/Behavior%20Tests/badge.svg)](https://github.com/Spam-Number-Filter/Spam-Filter-WebPage/actions/workflows/behavior-tests.yml)
+[![Deploy to Heroku](https://github.com/Spam-Number-Filter/Spam-Filter-WebPage/actions/workflows/deploy-heroku.yml/badge.svg)](https://github.com/Spam-Number-Filter/Spam-Filter-WebPage/actions/workflows/deploy-heroku.yml)
 
 ## Summary
 
