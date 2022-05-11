@@ -33,6 +33,9 @@ class Post(Model):
     telephone_prefix = models.IntegerField()
     telephone_number = models.IntegerField()
     telephone = models.ForeignKey(Telephone, on_delete=models.CASCADE)
+    likes = models.ManyToManyField(
+        AUTH_USER_MODEL, related_name="tel_posts", blank=True
+    )
 
     def get_absolute_url(self):
         return reverse("post_detail", kwargs={"pk": self.pk})
@@ -48,17 +51,6 @@ class Comment(Model):
 
 
 MAX_CATEGORY_LENGTH = 20
-
-
-class Likes(Model):
-    user_id = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.PROTECT)
-    post_id = models.ForeignKey(Post, on_delete=models.PROTECT)
-
-    class Meta:
-        unique_together = (
-            "user_id",
-            "post_id",
-        )
 
 
 class Category(Model):

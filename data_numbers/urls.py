@@ -2,6 +2,7 @@
 and which view should be run when they are requested. """
 from django.urls import include, path
 from django.views.generic import TemplateView
+
 from data_numbers.views import (
     get_numbers,
     get_prefixes,
@@ -10,6 +11,7 @@ from data_numbers.views import (
     edit_username,
     login_user,
     register_user,
+    trendy_posts
 )
 
 urlpatterns = [
@@ -45,7 +47,7 @@ urlpatterns = [
     path("posts/<int:pk>", PostDetail.as_view(), name="post_detail"),
     path(
         "trendy/",
-        TemplateView.as_view(template_name="trendy.html"),
+        trendy_posts,
         name="trendy",
     ),
 ]

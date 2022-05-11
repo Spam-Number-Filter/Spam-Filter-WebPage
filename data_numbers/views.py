@@ -15,6 +15,8 @@ from django.views.generic import CreateView, DetailView
 
 from data_numbers.forms import ModifyUsernameForm, PostForm, UserRegistrationForm
 from data_numbers.models import Post, Telephone
+from data_numbers.forms import ModifyUsernameForm, UserRegistrationForm
+from data_numbers.models import Post
 
 
 def index(request):
@@ -113,3 +115,27 @@ def get_numbers(request):
         return HttpResponse(json.dumps([p.phone for p in numbers]))
     except Exception as e:
         return HttpResponse(f"Error: ${e}")
+
+
+def trendy_posts(request):
+    all_posts = Post.objects.all()
+    ten_trendy_posts = get_trendy_posts(all_posts)
+    context = {"ten_trendy_posts": ten_trendy_posts}
+    return render(request, "trendy.html", context)
+
+
+def get_trendy_posts(all_posts):
+    trendy_posts_dict = dict()
+    for post in all_posts:
+        trendy_posts_dict[post.post_id] = post.likes.count()
+    trendy_posts_dict = sorted(
+        trendy_posts_dict.items(), key=lambda x: x[1], reverse=True
+    )[:10]
+    return get_posts(trendy_posts_dict)
+
+
+def get_posts(trendy_posts_dict):
+    ten_trendy_posts = []
+    for post_id, _ in trendy_posts_dict:
+        ten_trendy_posts.append(Post.objects.get(post_id=post_id))
+    return ten_trendy_posts
