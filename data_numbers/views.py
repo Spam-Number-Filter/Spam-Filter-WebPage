@@ -16,6 +16,7 @@ from django.views.generic import CreateView, DetailView
 from data_numbers.forms import ModifyUsernameForm, PostForm, UserRegistrationForm
 from data_numbers.models import Post, Telephone
 
+
 def index(request):
     """Controller of the index page."""
     template = loader.get_template("home.html")
