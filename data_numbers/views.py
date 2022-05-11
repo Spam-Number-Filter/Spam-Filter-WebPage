@@ -101,7 +101,8 @@ def get_prefixes(request):
     try:
         prefix = request.GET["prefix"]
         prefixes = Telephone.objects.filter(prefix__startswith=prefix)
-        return HttpResponse(json.dumps([p.prefix for p in prefixes]))
+        unique_prefixes = list(set([p.prefix for p in prefixes]))
+        return HttpResponse(json.dumps(unique_prefixes))
     except Exception as e:
         return HttpResponse(f"Error: ${e}")
 
