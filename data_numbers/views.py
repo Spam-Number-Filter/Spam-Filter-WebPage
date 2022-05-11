@@ -15,8 +15,6 @@ from django.views.generic import CreateView, DetailView
 
 from data_numbers.forms import ModifyUsernameForm, PostForm, UserRegistrationForm
 from data_numbers.models import Post, Telephone
-from data_numbers.forms import ModifyUsernameForm, UserRegistrationForm
-from data_numbers.models import Post
 
 
 def index(request):
