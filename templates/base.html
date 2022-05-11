@@ -6,6 +6,7 @@
     <title>{% block title %}Spam Filter Webpage{% endblock %}</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/post.css' %}">
     <link rel="shortcut icon" href=" {% static 'favicon.ico' %}"/>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -53,10 +54,18 @@
         </div>
     {% endfor %}
 {% endif %}
+
 <div id="content">
     {% block content %}{% endblock %}
 </div>
 
+<div id="footer" class="footer">
+    {% block footer %}
+        <footer class="py-5 bg-dark">
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>
+        </footer>
+    {% endblock %}
+</div>
 
 </body>
 

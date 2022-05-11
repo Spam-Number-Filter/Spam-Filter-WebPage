@@ -1,0 +1,9 @@
+@media (max-width: 767px) {
+    .card-6 .card-footer {
+        padding: 50px 30px;
+    }
+}
+.bg-dark {
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+}
