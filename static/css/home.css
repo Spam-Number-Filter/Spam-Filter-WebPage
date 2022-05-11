@@ -1,3 +1,4 @@
+@import url('base.css');
 
 html {
   line-height: 1.15;
@@ -22,7 +23,6 @@ body {
  */
 article,
 aside,
-footer,
 header,
 nav,
 section {

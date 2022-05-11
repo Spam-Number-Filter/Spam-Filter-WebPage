@@ -1,3 +1,5 @@
+@import url('base.css');
+
 .main-body{
     display: flex;
     flex-wrap: wrap;
