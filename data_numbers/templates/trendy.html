@@ -2,27 +2,36 @@
 {% block title %}Trendy{% endblock %}
 {% block style %}
 {% load static %}
+<link rel="stylesheet" href="{% static 'css/trendy.css' %}">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
+{% for post in ten_trendy_posts %}
 <div class="container mt-5 mb-5">
     <div class="row d-flex justify-content-center">
         <div class="col-md-8">
             <div class="d-flex flex-row"></div>
             <div class="row news-card p-3 bg-white">
                 <div class="col-md-4">
-                    <div class="feed-image"><img class="news-feed-image rounded img-fluid img-responsive" src="https://i.imgur.com/ZKbpmaU.jpg"></div>
+                    <div class="feed-image"><img class="news-feed-image rounded img-fluid img-responsive"
+                                                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrpDeR_eAF06aFOF97WFC7AL4CvhxJNKFLSQ&usqp=CAU">
+                    </div>
                 </div>
                 <div class="col-md-8">
                     <div class="news-feed-text">
-                        <h5>Green plants are going to extinct about 500 times</h5><span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard<br></span>
+                        <h5>{{post.title}}</h5><span>{{post.message}}<br></span>
                         <div class="d-flex flex-row justify-content-between align-items-center mt-2">
-                            <div class="d-flex creator-profile"><img class="rounded-circle" src="https://i.imgur.com/uSlStch.jpg" width="50" height="50">
+                            <div class="d-flex creator-profile"><img class="rounded-circle"
+                                                                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIIAAACCCAMAAAC93eDPAAAAMFBMVEXk5ueutLfn6eqrsbTZ3N2/xMbN0dO0ubzW2drGysy7wMLc3+DS1dfKztDh4+Tq7O3d3uCKAAAC+0lEQVR4nO2a2XLkIAxFjQCzeOH//3bwkkwn7cYSLdFTNdynrrxwcpEESB6Grq6urq6urq6urq6u/01w6FPLp8HMi80K4zx9AANWH5XSX1IumKEpBazB5XUfpbWbG0JA+LX+SeF8agRg1BXADhHXJkaEVwAbg/LyDGALBBvELM0ArkzQgCHeEWSGUZLhbhdOBsF4gBlDkBlWMYQJR6CUk7IBIpJALByw27BLaCscnkAHCRtgJJggYwMQTMg2LAI2GApBFv+hCaXT6coGw46QiCYIBCS6LH3JcRMQ82GzgR2BGAoSwYAuzt8I7EWaVBV2BPZ4pBIoZbkRqKGgVOwIEghkAv5YIBPwZwS9LrAf15aMwP2kgYVcoNnvTZ6cEtwE9Ky07ASJeEhIPCWIFwb260LWSiNgr40D9lX9jeD5CfLtkeKCzMOWYoOMCTka0Aia/Yg6ha+Qcj2O+17XSSDYbcIlpraCTVjAvG11lAPYGBCnlZNrdh0M5oZBs78lLxiKMSm8CyfDWujA6qUBQVYaL8cRWx9+ajUUAQgXIwnt5kYTkQNiXZx68CL/jL7tcCpDDNNoj8VzHlq/fmRUCCkN62SmFdInZoR5zby68btMxhgacmxr+8U6d8TAPqXc9sLFMJtMIsyR/3kfotPXSbn9OdpZkAKSWeKL1X+AuGBEKGBafg9oCxSKfX4Mg48v56OvvBgZx6aQRuR16SeFCkz7AcOrIwFhheVwAuYaBx6ceDcmYELMRssQ7r1WR1pq9+ARItaHBEzv7MEjRO34FmaW9XeGuu4bvbtUYqh569MHEGUGR8+MdzPhSY54rwR2AuoTJ5E6KmgGigeckVjFQBrRU4TvfJCaSjQGZLFOTDXxkgG3DUKBcAhVovBNrRphjgvmqvgkRFbQ+rx03UektAmYvix5MEzWXWNWqir91V19orXbKxnKjZAkT3D3YQP5c5EahOIAk/65SI2KgzP5lNxUrk4Cl6Vnlc8q8mS6SsUbHDRR0YWurq6urn9FfwCAMR/QMmgl9QAAAABJRU5ErkJggg=="
+                                                                     width="50" height="50">
                                 <div class="d-flex flex-column ml-2">
-                                    <h6 class="username">Alexendor patriot</h6><span class="date">Jan 20,2020</span>
+                                    <h6 class="username">{{post.creation_user_id}}</h6><span
+                                        class="date">{{post.date}}</span>
                                 </div>
-                            </div><i class="fa fa-share share"></i>
+                            </div>
+                            <div class="d-flex flex-row"><span class="align-middle"><i
+                                    class="fa-solid fa-heart"></i></span><h5>{{post.likes.count}}</h5></div>
                         </div>
                     </div>
                 </div>
@@ -30,4 +39,5 @@
         </div>
     </div>
 </div>
+{% endfor %}
 {% endblock %}
