@@ -5,12 +5,15 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/post_detail.css' %}">
     <script>
-        function deletePost() {
+        function deletePost(post_id) {
             $.ajax({
-                url: 'api/delete_post',
+                url: 'api/delete_post/',
                 type: 'POST',
+                data: {
+                    post_id: post_id
+                },
                 success: function (data) {
-                    console.log(data);
+                    top.location.href = data;
                 }
             });
         }
@@ -48,7 +51,7 @@
                         </section>
                         {% csrf_token %}
                         <h5><i class="fa-solid fa-heart"> Like</i></h5>
-                        <button onclick="deletePost()"  ><i class="fa fa-minus" > <FONT COLOR=red>Delete Post</FONT> </i> {% csrf_token %}</button>
+                        <button onclick="deletePost( {{post.post_id}} )"  ><i class="fa fa-minus" > <FONT COLOR=red>Delete Post</FONT> </i> {% csrf_token %}</button>
                     </article>
                     <!-- Comments section-->
                     <section class="mb-5">

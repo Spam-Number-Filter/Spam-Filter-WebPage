@@ -218,9 +218,8 @@ def add_comment(request, pk):
 
 @csrf_exempt
 def delete_posts(request):
-    print("hola")
-    if request.method == "POST":
-        print(request.POST["post_id"])
-        # post = Post.objects.get(post_id)
-        # post.delete()
-        # redirect("")
+    post_id = request.POST["post_id"]
+    print(post_id)
+    post = Post.objects.get(post_id=post_id)
+    post.delete()
+    return HttpResponse("/")
