@@ -52,7 +52,7 @@
                         {% csrf_token %}
                         <h5><i class="fa-solid fa-heart"> Like</i></h5>
                         {% if user.id == post.user_id.id %}
-                            <button onclick="deletePost( {{post.post_id}} )"  ><i class="fa fa-minus" > <FONT COLOR=red>Delete Post</FONT> </i> {% csrf_token %}</button>
+                            <button onclick="deletePost( {{post.post_id}} )"  ><FONT COLOR=red>DELETE POST</FONT> </i> {% csrf_token %}</button>
                         {% endif %}
                     </article>
                     <!-- Comments section-->
