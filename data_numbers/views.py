@@ -141,6 +141,23 @@ def get_numbers(request):
         return HttpResponse(f"Error: ${e}")
 
 
+def search_numbers(request):
+    print("search_numbers")
+    return HttpResponse("search_numbers")
+    # if request.method == "GET":
+    #     prefix = request.GET["prefix"]
+    #     number = request.GET["number"]
+    #     telephone = Telephone.objects.filter(prefix__startswith=prefix, phone__startswith=number)
+    #     print(telephone)
+    #     if telephone:
+    #         post = Post.objects.filter(telephone=telephone.get().telephone_id)
+    #         return redirect(request, "posts/" + post.get().post_id, {})
+    #     else:
+    #         return redirect(request, "post/create", {})
+    # else:
+    #     return HttpResponse("Invalid request")
+
+
 def trendy_posts(request):
     all_posts = Post.objects.all()
     ten_trendy_posts = get_trendy_posts(all_posts)

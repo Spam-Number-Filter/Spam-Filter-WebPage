@@ -11,6 +11,7 @@ from data_numbers.views import (
     get_prefixes,
     login_user,
     register_user,
+    search_numbers,
     trendy_posts,
 )
 
@@ -43,6 +44,7 @@ urlpatterns = [
     ),
     path("api/get_prefixes/", get_prefixes, name="get_prefixes"),
     path("api/get_numbers/", get_numbers, name="get_places"),
+    path("api/search_number/", search_numbers, name="search_numbers"),
     # Post details
     path("posts/<int:pk>", PostDetail.as_view(), name="post_detail"),
     path(

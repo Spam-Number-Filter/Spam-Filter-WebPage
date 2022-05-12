@@ -17,7 +17,7 @@
                             prefix: request.term,
                         },
                         success: function (data) {
-                            response( $.map( JSON.parse(data), function( item ) {
+                            response($.map(JSON.parse(data), function (item) {
                                 return {
                                     label: item,
                                     value: item
@@ -27,7 +27,7 @@
                     })
                 },
                 minLength: 0,
-                select: function( event, ui ) {
+                select: function (event, ui) {
                     if (ui.item) {
                         $("#TelephoneNumberPrefix").val(ui.item.value);
                     }
@@ -45,7 +45,7 @@
                             number: request.term,
                         },
                         success: function (data) {
-                            response( $.map( JSON.parse(data), function( item ) {
+                            response($.map(JSON.parse(data), function (item) {
                                 return {
                                     label: item,
                                     value: item
@@ -55,7 +55,7 @@
                     })
                 },
                 minLength: 3,
-                select: function( event, ui ) {
+                select: function (event, ui) {
                     if (ui.item) {
                         $("#TelephoneNumberText").val(ui.item.value);
                     }
@@ -63,7 +63,21 @@
             });
         });
 
-    </script>
+        function onSearchClick() {
+            const prefix = $("#TelephoneNumberPrefix").val();
+            const number = $("#TelephoneNumberText").val();
+            $.ajax({
+                url: 'api/search_number',
+                type: 'GET',
+                data: {
+                    prefix: prefix,
+                    number: number,
+                },
+                success: function (data) {
+                    console.log(data);
+                }
+            });
+        }</script>
 {% endblock %}
 {% block content %}
     <html>
@@ -88,7 +102,7 @@
                     <input id="TelephoneNumberText" type="text" placeholder="Telephone number here"/>
                 </div>
                 <div class="input-field third-wrap">
-                    <button class="btn-search" type="button">Search</button>
+                    <button id="Search" class="btn-search" onclick="onSearchClick()" type="button">Search</button>
                 </div>
             </div>
         </form>
