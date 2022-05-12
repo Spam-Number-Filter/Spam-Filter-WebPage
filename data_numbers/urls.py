@@ -6,6 +6,7 @@ from django.views.generic import TemplateView
 from data_numbers.views import (
     PostCreate,
     PostDetail,
+    add_comment,
     edit_username,
     get_numbers,
     get_prefixes,
@@ -52,4 +53,5 @@ urlpatterns = [
         trendy_posts,
         name="trendy",
     ),
+    path("posts/<int:pk>/comment", add_comment, name="add_comment"),
 ]

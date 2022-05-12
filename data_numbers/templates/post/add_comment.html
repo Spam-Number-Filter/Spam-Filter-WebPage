@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% block style %}
+{% endblock %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+    {% if user.is_authenticated %}
+        <div class="form-group">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn btn-secondary"> Submit</button>
+            </form>
+        </div>
+    {% endif %}
+{% endblock %}

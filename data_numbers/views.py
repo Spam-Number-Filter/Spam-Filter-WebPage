@@ -7,17 +7,26 @@ import django.core.handlers.wsgi
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from django.http import HttpResponse
 
 # Create your views here.
 from django.shortcuts import redirect, render
 from django.template import loader
+from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView
 
 from data_numbers.forms import ModifyUsernameForm, PostForm, UserRegistrationForm
 from data_numbers.models import Post, Telephone
 from data_numbers.validation.number_validation import NumberValidation
 from data_numbers.validation.number_validation_factory import get_number_validation
+from data_numbers.forms import (
+    CommentForm,
+    ModifyUsernameForm,
+    PostForm,
+    UserRegistrationForm,
+)
+from data_numbers.models import Comment, Post, Telephone
 
 
 def index(request):
@@ -177,3 +186,33 @@ def get_posts(trendy_posts_dict):
     for post_id, _ in trendy_posts_dict:
         ten_trendy_posts.append(Post.objects.get(post_id=post_id))
     return ten_trendy_posts
+
+
+class AddCommentView(CreateView):
+    model = Comment
+    form_class = CommentForm
+    template_name = "post/add_comment.html"
+    success_url = reverse_lazy("home")
+
+    # def form_valid(self, form):
+    # form.instance.post_id = Post.objects.get(self.kwargs['pk'])
+    # form.instance.post_id = Post.objects.get(user_id=self.kwargs['pk'])
+    # return super().form_valid(form)
+
+
+def add_comment(request, pk):
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            user = request.user.username
+            comment = Comment()
+            comment.post_id = Post.objects.get(pk=pk)
+            comment.user_id = User.objects.get(username=user)
+            comment.message = form.get_message()
+            comment.save()
+        else:
+            messages.success(request, form.errors)
+        return redirect("home")
+    else:
+        print(request)
+        return render(request, "profile.html", {})
