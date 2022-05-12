@@ -4,9 +4,9 @@ from django.urls import include, path
 from django.views.generic import TemplateView
 
 from data_numbers.views import (
+    AddCommentView,
     PostCreate,
     PostDetail,
-    add_comment,
     delete_posts,
     edit_username,
     get_numbers,
@@ -50,11 +50,11 @@ urlpatterns = [
     path("api/search_number/", search_numbers, name="search_numbers"),
     path("posts/api/delete_post/", delete_posts, name="delete_posts"),
     # Post details
-    path("posts/<int:pk>", PostDetail.as_view(), name="post_detail"),
+    path("posts/<int:pk>/", PostDetail.as_view(), name="post_detail"),
     path(
         "trendy/",
         trendy_posts,
         name="trendy",
     ),
-    path("posts/<int:pk>/comment", add_comment, name="add_comment"),
+    path("posts/<int:pk>/comment", AddCommentView.as_view(), name="add_comment"),
 ]

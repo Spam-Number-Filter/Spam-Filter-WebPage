@@ -193,6 +193,22 @@ class AddCommentView(CreateView):
     template_name = "post/add_comment.html"
     success_url = reverse_lazy("home")
 
+    def form_valid(self, form):
+        if self.request.method == "POST":
+            form = CommentForm(self.request.POST)
+            if form.is_valid():
+                user = self.request.user.username
+                comment = Comment()
+                comment.post_id = Post.objects.get(pk=self.kwargs["pk"])
+                comment.user_id = User.objects.get(username=user)
+                comment.message = form.get_message()
+                comment.save()
+            else:
+                messages.success(self.request, form.errors)
+            return redirect("post_detail", self.kwargs["pk"])
+        else:
+            return redirect("home")
+
     # def form_valid(self, form):
     # form.instance.post_id = Post.objects.get(self.kwargs['pk'])
     # form.instance.post_id = Post.objects.get(user_id=self.kwargs['pk'])
