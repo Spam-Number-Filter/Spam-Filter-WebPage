@@ -234,7 +234,7 @@ def add_comment(request, pk):
 
 
 @csrf_exempt
-def delete_posts(request):
+def delete_posts(request, pk):
     post_id = request.POST["post_id"]
     print(post_id)
     post = Post.objects.get(post_id=post_id)
