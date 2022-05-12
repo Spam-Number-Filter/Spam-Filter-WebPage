@@ -26,6 +26,7 @@ from data_numbers.forms import (
 from data_numbers.models import Comment, Post, Telephone
 from data_numbers.validation.number_validation import NumberValidation
 from data_numbers.validation.number_validation_factory import get_number_validation
+from data_numbers.models import Category, Post, Telephone
 
 
 def index(request):
@@ -92,6 +93,10 @@ class PostCreate(CreateView):
     template_name = "post/post_creation.html"
 
     def form_valid(self, form):
+        form.instance.user_id = self.request.user
+        form.instance.telephone = self.getPostCreationTelephone(form)
+        form.instance.category = self.getPostCreationCategory(form)
+        # return super(PostCreate, self).form_valid(form)
         if not PostCreate.is_valid_telephone(form):
             error_message = PostCreate.get_validator(form).valid_number().error_message
             messages.error(self.request, error_message)
@@ -113,16 +118,20 @@ class PostCreate(CreateView):
     @staticmethod
     def get_prefix_and_suffix(form) -> Tuple[int, int]:
         return (
-            form.cleaned_data["telephone_prefix"],
-            form.cleaned_data["telephone_number"],
+            form.data["telephone_prefix"],
+            form.data["telephone_number"],
         )
 
     @staticmethod
     def getPostCreationTelephone(form) -> Telephone:
-        prefix = form.cleaned_data["telephone_prefix"]
-        number = form.cleaned_data["telephone_number"]
+        prefix = form.data["telephone_prefix"]
+        number = form.data["telephone_number"]
         telephone = Telephone.objects.create(prefix=prefix, phone=number)
         return Telephone.objects.get(telephone_id=telephone.telephone_id)
+
+    def getPostCreationCategory(self, form):
+        category = form.data["selector"]
+        return Category.objects.get(type=category)
 
 
 class PostDetail(DetailView):

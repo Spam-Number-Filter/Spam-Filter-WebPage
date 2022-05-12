@@ -70,7 +70,7 @@ class ModifyUsernameForm(UserChangeForm):
 class PostForm(ModelForm):
     class Meta:
         model = Post
-        exclude = ("post_id", "user_id", "date", "telephone")
+        exclude = ("post_id", "user_id", "date", "telephone", "category")
 
 
 class CommentForm(ModelForm):
