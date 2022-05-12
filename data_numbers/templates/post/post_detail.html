@@ -24,145 +24,89 @@
 
     <html lang="en">
     <body>
-    <!-- Page content-->
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-lg-8">
-                <!-- Post content-->
-                <article>
-                    <!-- Post header-->
-                    <header class="mb-4">
-                        <!-- Post title-->
-                        <h1 class="fw-bolder mb-1"> +{{ post.telephone_prefix }} {{ post.telephone_number }} </h1>
-                        <!-- Phone number-->
-                        <h2 class="fw-bold"> {{ post.title }}</h2>
-                        <!-- Post meta content-->
-                        <div class="text-muted fst-italic mb-2">Posted on {{ post.date }} by {{ post.user_id }} </div>
-                        <!-- Post categories-->
-                        <a class="badge bg-secondary text-decoration-none link-light" href="#!"> Spam </a>
-                        <a class="badge bg-secondary text-decoration-none link-light" href="#!"> Advertising </a>
-                    </header>
-
-                    <!-- Preview image figure-->
-                    <figure class="mb-4"><img class="img-fluid rounded"
-                                              src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="..."/>
-                    </figure>
+        <!-- Center the page content-->
+        <div class="container mt-5" >
+            <div class="row">
+                <div class="col-lg-8">
                     <!-- Post content-->
+                    <article>
+                        <!-- Post header-->
+                        <header class="mb-4">
+                            <!-- Post title-->
+                            <h1 class="fw-bolder mb-1"> +{{ post.telephone.prefix }} {{ post.telephone.phone }} </h1>
+                            <!-- Phone number-->
+{#                            <h2 class="fw-bold"> {{ post.title }}</h2>#}
+                            <!-- Post meta content-->
+                            <div class="text-muted fst-italic mb-2">Posted on {{ post.date }} by {{ post.user_id }} </div>
+                            <!-- Post categories-->
+                            <a class="badge bg-secondary text-decoration-none link-light" href="#!"> {{ post.category.type }} </a>
+                        </header>
+                        <!-- Preview image figure-->
+                        <figure class="mb-4"><img class="img-fluid rounded" src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="..." /></figure>
+                        <!-- Post content-->
+                        <section class="mb-5">
+                            <p class="fs-5 mb-4"> {{ post.message }} </p>
+                        </section>
+                        <div class="card">
+                            <img src="https://i.imgur.com/Oco4P6B.png" class="card-img-top" alt="Image describing post category" width="30%" height="30%"/>
+                            <div class="card-body">
+                                <h5 class="fw-bold"> {{ post.title }} </h5>
+                                <p class="fs-5 mb-4"> {{ post.message }} </p>
+                                {% if user.id == post.user_id.id %}
+                                    <button class="btn btn-warning" onclick="location.href = '/post/edit/{{post.post_id}}'"
+                                    >MODIFY
+                                        POST {% csrf_token %}</button>
+                                    <button class="btn btn-danger" onclick="deletePost( {{ post.post_id }} )">DELETE
+                                        POST </i> {% csrf_token %}</button>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </article>
+                    <!-- Comments section-->
                     <section class="mb-5">
-                        <p class="fs-5 mb-4"> {{ post.message }} </p>
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <!-- Comment form-->
+                                <form class="mb-4"><textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea></form>
+                                <!-- Comment with nested comments-->
+                                <div class="d-flex mb-4">
+                                    <!-- Parent comment-->
+                                    <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                                    <div class="ms-3">
+                                        <div class="fw-bold">Commenter Name</div>
+                                        If you're going to lead a space frontier, it has to be government; it'll never be private enterprise. Because the space frontier is dangerous, and it's expensive, and it has unquantified risks.
+                                        <!-- Child comment 1-->
+                                        <div class="d-flex mt-4">
+                                            <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                                            <div class="ms-3">
+                                                <div class="fw-bold">Commenter Name</div>
+                                                And under those conditions, you cannot establish a capital-market evaluation of that enterprise. You can't get investors.
+                                            </div>
+                                        </div>
+                                        <!-- Child comment 2-->
+                                        <div class="d-flex mt-4">
+                                            <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                                            <div class="ms-3">
+                                                <div class="fw-bold">Commenter Name</div>
+                                                When you put money directly to a problem, it makes a good headline.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Single comment-->
+                                <div class="d-flex">
+                                    <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                                    <div class="ms-3">
+                                        <div class="fw-bold">Commenter Name</div>
+                                        When I look at the universe and all the ways the universe wants to kill us, I find it hard to reconcile that with statements of beneficence.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </section>
-                    {% csrf_token %}
-                    <h5><i class="fa-solid fa-heart"> Like</i></h5>
-                    {% if user.id == post.user_id.id %}
-                        <button class="btn btn-info" onclick="location.href = '/post/edit/{{post.post_id}}'"
-                        >MODIFY
-                            POST {% csrf_token %}</button>
-                        <button onclick="deletePost( {{ post.post_id }} )"><FONT COLOR=red>DELETE
-                            POST</FONT> </i> {% csrf_token %}</button>
-                    {% endif %}
-                </article>
-                <!-- Comments section-->
-                <section class="mb-5">
-                    <div class="card bg-light">
-                        <div class="card-body">
-                            <!-- Comment form-->
-                            <form class="mb-4"><textarea class="form-control" rows="3"
-                                                         placeholder="Join the discussion and leave a comment!"></textarea>
-                            </form>
-                            <!-- Comment with nested comments-->
-                            <div class="d-flex mb-4">
-                                <!-- Parent comment-->
-                                <div class="flex-shrink-0"><img class="rounded-circle"
-                                                                src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
-                                                                alt="..."/></div>
-                                <div class="ms-3">
-                                    <div class="fw-bold">Commenter Name</div>
-                                    If you're going to lead a space frontier, it has to be government; it'll never be
-                                    private enterprise. Because the space frontier is dangerous, and it's expensive, and
-                                    it has unquantified risks.
-                                    <!-- Child comment 1-->
-                                    <div class="d-flex mt-4">
-                                        <div class="flex-shrink-0"><img class="rounded-circle"
-                                                                        src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
-                                                                        alt="..."/></div>
-                                        <div class="ms-3">
-                                            <div class="fw-bold">Commenter Name</div>
-                                            And under those conditions, you cannot establish a capital-market evaluation
-                                            of that enterprise. You can't get investors.
-                                        </div>
-                                    </div>
-                                    <!-- Child comment 2-->
-                                    <div class="d-flex mt-4">
-                                        <div class="flex-shrink-0"><img class="rounded-circle"
-                                                                        src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
-                                                                        alt="..."/></div>
-                                        <div class="ms-3">
-                                            <div class="fw-bold">Commenter Name</div>
-                                            When you put money directly to a problem, it makes a good headline.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Single comment-->
-                            <div class="d-flex">
-                                <div class="flex-shrink-0"><img class="rounded-circle"
-                                                                src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
-                                                                alt="..."/></div>
-                                <div class="ms-3">
-                                    <div class="fw-bold">Commenter Name</div>
-                                    When I look at the universe and all the ways the universe wants to kill us, I find
-                                    it hard to reconcile that with statements of beneficence.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-            <!-- Side widgets-->
-            <div class="col-lg-4">
-                <!-- Search widget-->
-                <div class="card mb-4">
-                    <div class="card-header">Search</div>
-                    <div class="card-body">
-                        <div class="input-group">
-                            <input class="form-control" type="text" placeholder="Enter search term..."
-                                   aria-label="Enter search term..." aria-describedby="button-search"/>
-                            <button class="btn btn-primary" id="button-search" type="button">Go!</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Categories widget-->
-                <div class="card mb-4">
-                    <div class="card-header">Votes</div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <ul class="list-unstyled mb-0">
-                                    <li><a> Spam: 3 Votes</a></li>
-                                    <li><a> Advertising: 1 Vote </a></li>
-                                    <li><a> Scam: 0 Votes </a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card mb-4">
-                    <div class="card-header">Vote a categorie</div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <ul class="list-unstyled mb-0">
-                                    <li><a href="#!"> Spam </a></li>
-                                    <li><a href="#!"> Advertising </a></li>
-                                    <li><a href="#!"> Scam </a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
-    </div>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     </body>

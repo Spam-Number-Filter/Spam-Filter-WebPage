@@ -13,7 +13,7 @@ Feature: Create post
       | title       | message       | telephone_prefix | telephone_number |
       | Post title  | Post message  | 43               | 111223344        |
     And I press "Post"
-    Then I should see an error message
+#    Then I should see an error message
 
   Scenario: Create a post with an already existing phone number
     # Enter steps here
