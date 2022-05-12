@@ -216,6 +216,7 @@ def add_comment(request, pk):
         print(request)
         return render(request, "profile.html", {})
 
+
 @csrf_exempt
 def delete_posts(request):
     post_id = request.POST["post_id"]
