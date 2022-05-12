@@ -4,14 +4,14 @@ from django.urls import include, path
 from django.views.generic import TemplateView
 
 from data_numbers.views import (
-    get_numbers,
-    get_prefixes,
     PostCreate,
     PostDetail,
     edit_username,
+    get_numbers,
+    get_prefixes,
     login_user,
     register_user,
-    trendy_posts
+    trendy_posts,
 )
 
 urlpatterns = [
