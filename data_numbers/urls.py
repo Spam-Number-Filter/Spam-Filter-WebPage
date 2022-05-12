@@ -7,6 +7,7 @@ from data_numbers.views import (
     PostCreate,
     PostDetail,
     add_comment,
+    delete_posts,
     edit_username,
     get_numbers,
     get_prefixes,
@@ -46,6 +47,7 @@ urlpatterns = [
     path("api/get_prefixes/", get_prefixes, name="get_prefixes"),
     path("api/get_numbers/", get_numbers, name="get_places"),
     path("api/search_number/", search_numbers, name="search_numbers"),
+    path("posts/api/delete_post", delete_posts, name="delete_posts"),
     # Post details
     path("posts/<int:pk>", PostDetail.as_view(), name="post_detail"),
     path(

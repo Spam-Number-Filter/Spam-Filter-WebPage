@@ -4,8 +4,21 @@
 {% block style %}
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/post_detail.css' %}">
+    <script>
+        function deletePost() {
+            $.ajax({
+                url: 'api/delete_post',
+                type: 'POST',
+                success: function (data) {
+                    console.log(data);
+                }
+            });
+        }
+    </script>
+
 {% endblock %}
 {% block content %}
+
 <html lang="en">
     <body>
         <!-- Page content-->
@@ -33,6 +46,9 @@
                         <section class="mb-5">
                             <p class="fs-5 mb-4"> {{ post.message }} </p>
                         </section>
+                        {% csrf_token %}
+                        <h5><i class="fa-solid fa-heart"> Like</i></h5>
+                        <button onclick="deletePost()"  ><i class="fa fa-minus" > <FONT COLOR=red>Delete Post</FONT> </i> {% csrf_token %}</button>
                     </article>
                     <!-- Comments section-->
                     <section class="mb-5">
