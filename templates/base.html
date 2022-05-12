@@ -32,8 +32,10 @@
             <li class="nav-item">
                 <a class="nav-link" href="/trendy/" id="trendy"><i class="fa fa-star"></i> Trendy Posts</a>
             </li>
-            <li class="nav-item {% if nbar == 'search' %}active{% endif %}">
-                <a class="nav-link" href="/search/"><i class="fa fa-search"></i> Search</a>
+            <li class="nav-item">
+                {% if user.is_authenticated %}
+                    <a class="nav-link" href="/post/create" id="create"><i class="fa fa-plus"></i> Create Post</a>
+                {% endif %}
             </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
