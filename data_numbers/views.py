@@ -1,6 +1,7 @@
 """ File that contains the controller of MVC,
 the code controlling the business logic of the application. """
 import json
+from typing import Tuple
 
 import django.core.handlers.wsgi
 from django.contrib import messages
@@ -15,6 +16,8 @@ from django.views.generic import CreateView, DetailView
 
 from data_numbers.forms import ModifyUsernameForm, PostForm, UserRegistrationForm
 from data_numbers.models import Post, Telephone
+from data_numbers.validation.number_validation import NumberValidation
+from data_numbers.validation.number_validation_factory import get_number_validation
 
 
 def index(request):
@@ -33,7 +36,7 @@ def login_user(request: django.core.handlers.wsgi.WSGIRequest):
             login(request, user)
             return redirect("/")
         else:
-            messages.error(request, ("There was an error logging in"))
+            messages.error(request, "There was an error logging in")
             return redirect("login")
     else:
         print(request)
@@ -81,11 +84,33 @@ class PostCreate(CreateView):
     template_name = "post/post_creation.html"
 
     def form_valid(self, form):
-        form.instance.user_id = self.request.user
-        form.instance.telephone = self.getPostCreationTelephone(form)
-        return super(PostCreate, self).form_valid(form)
+        if not PostCreate.is_valid_telephone(form):
+            error_message = PostCreate.get_validator(form).valid_number().error_message
+            messages.error(self.request, error_message)
+            return redirect("post_create")
+        else:
+            form.instance.user_id = self.request.user
+            form.instance.telephone = PostCreate.getPostCreationTelephone(form)
+            return super(PostCreate, self).form_valid(form)
 
-    def getPostCreationTelephone(self, form):
+    @staticmethod
+    def is_valid_telephone(form):
+        return PostCreate.get_validator(form).valid_number().is_valid
+
+    @staticmethod
+    def get_validator(form) -> NumberValidation:
+        prefix, number = PostCreate.get_prefix_and_suffix(form)
+        return get_number_validation(prefix, number)
+
+    @staticmethod
+    def get_prefix_and_suffix(form) -> Tuple[int, int]:
+        return (
+            form.cleaned_data["telephone_prefix"],
+            form.cleaned_data["telephone_number"],
+        )
+
+    @staticmethod
+    def getPostCreationTelephone(form) -> Telephone:
         prefix = form.cleaned_data["telephone_prefix"]
         number = form.cleaned_data["telephone_number"]
         telephone = Telephone.objects.create(prefix=prefix, phone=number)
