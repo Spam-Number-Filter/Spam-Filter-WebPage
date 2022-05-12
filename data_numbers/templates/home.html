@@ -27,6 +27,11 @@
                     })
                 },
                 minLength: 0,
+                select: function( event, ui ) {
+                    if (ui.item) {
+                        $("#TelephoneNumberPrefix").val(ui.item.value);
+                    }
+                }
             });
         });
 
@@ -50,6 +55,11 @@
                     })
                 },
                 minLength: 3,
+                select: function( event, ui ) {
+                    if (ui.item) {
+                        $("#TelephoneNumberText").val(ui.item.value);
+                    }
+                }
             });
         });
 
