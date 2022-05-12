@@ -15,7 +15,7 @@ from django.shortcuts import redirect, render
 from django.template import loader
 from django.urls import reverse_lazy
 from django.views.decorators.csrf import csrf_exempt
-from django.views.generic import CreateView, DetailView
+from django.views.generic import CreateView, DetailView, UpdateView
 
 from data_numbers.forms import (
     CommentForm,
@@ -240,3 +240,12 @@ def delete_posts(request):
     post = Post.objects.get(post_id=post_id)
     post.delete()
     return HttpResponse("/")
+
+
+class PostUpdateView(UpdateView):
+    model = Post
+    fields = (
+        "title",
+        "message",
+    )
+    template_name = "post/post_update_form.html"

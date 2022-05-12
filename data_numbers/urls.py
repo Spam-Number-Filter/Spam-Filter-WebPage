@@ -7,6 +7,8 @@ from data_numbers.views import (
     AddCommentView,
     PostCreate,
     PostDetail,
+    PostUpdateView,
+    add_comment,
     delete_posts,
     edit_username,
     get_numbers,
@@ -46,7 +48,6 @@ urlpatterns = [
     ),
     path("api/get_prefixes/", get_prefixes, name="get_prefixes"),
     path("api/get_numbers/", get_numbers, name="get_places"),
-
     path("api/search_number/", search_numbers, name="search_numbers"),
     path("posts/api/delete_post/", delete_posts, name="delete_posts"),
     # Post details
@@ -57,4 +58,6 @@ urlpatterns = [
         name="trendy",
     ),
     path("posts/<int:pk>/comment", AddCommentView.as_view(), name="add_comment"),
+    path("post/edit/<int:pk>", PostUpdateView.as_view(), name="post_update_form"),
+    path("posts/<int:pk>/comment", add_comment, name="add_comment"),
 ]
