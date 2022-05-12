@@ -7,12 +7,13 @@
 {% endblock %}
 
 {% block content %}
+<body background="/static/images/background.png">
 {% for post in ten_trendy_posts %}
 <div class="container mt-5 mb-5">
     <div class="row d-flex justify-content-center">
         <div class="col-md-8">
             <div class="d-flex flex-row"></div>
-            <div class="row news-card p-3 bg-white">
+            <div class="row news-card p-3 bg-white" onclick="location.href = '/posts/{{post.post_id}}'">
                 <div class="col-md-4">
                     <div class="feed-image"><img class="news-feed-image rounded img-fluid img-responsive"
                                                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrpDeR_eAF06aFOF97WFC7AL4CvhxJNKFLSQ&usqp=CAU">
