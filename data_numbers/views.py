@@ -17,6 +17,8 @@ from django.urls import reverse_lazy
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import CreateView, DetailView, UpdateView
 
+from data_numbers.forms import ModifyUsernameForm, PostForm, UserRegistrationForm
+from data_numbers.models import Category, Post, Telephone
 from data_numbers.forms import (
     CommentForm,
     ModifyUsernameForm,
@@ -26,7 +28,6 @@ from data_numbers.forms import (
 from data_numbers.models import Comment, Post, Telephone
 from data_numbers.validation.number_validation import NumberValidation
 from data_numbers.validation.number_validation_factory import get_number_validation
-from data_numbers.models import Category, Post, Telephone
 
 
 def index(request):
@@ -94,9 +95,7 @@ class PostCreate(CreateView):
 
     def form_valid(self, form):
         form.instance.user_id = self.request.user
-        form.instance.telephone = self.getPostCreationTelephone(form)
         form.instance.category = self.getPostCreationCategory(form)
-        # return super(PostCreate, self).form_valid(form)
         if not PostCreate.is_valid_telephone(form):
             error_message = PostCreate.get_validator(form).valid_number().error_message
             messages.error(self.request, error_message)
