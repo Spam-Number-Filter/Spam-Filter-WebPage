@@ -17,15 +17,13 @@ from django.urls import reverse_lazy
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import CreateView, DetailView, UpdateView
 
-from data_numbers.forms import ModifyUsernameForm, PostForm, UserRegistrationForm
-from data_numbers.models import Category, Post, Telephone
 from data_numbers.forms import (
     CommentForm,
     ModifyUsernameForm,
     PostForm,
     UserRegistrationForm,
 )
-from data_numbers.models import Comment, Post, Telephone
+from data_numbers.models import Category, Comment, Post, Telephone
 from data_numbers.validation.number_validation import NumberValidation
 from data_numbers.validation.number_validation_factory import get_number_validation
 

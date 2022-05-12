@@ -29,24 +29,15 @@
             <div class="row">
                 <div class="col-lg-8">
                     <!-- Post content-->
-                    <article>
                         <!-- Post header-->
                         <header class="mb-4">
-                            <!-- Post title-->
-                            <h1 class="fw-bolder mb-1"> +{{ post.telephone.prefix }} {{ post.telephone.phone }} </h1>
                             <!-- Phone number-->
-{#                            <h2 class="fw-bold"> {{ post.title }}</h2>#}
+                            <h1 class="fw-bolder mb-1"> +{{ post.telephone.prefix }} {{ post.telephone.phone }} </h1>
                             <!-- Post meta content-->
                             <div class="text-muted fst-italic mb-2">Posted on {{ post.date }} by {{ post.user_id }} </div>
-                            <!-- Post categories-->
+                            <!-- Post category-->
                             <a class="badge bg-secondary text-decoration-none link-light" href="#!"> {{ post.category.type }} </a>
                         </header>
-                        <!-- Preview image figure-->
-                        <figure class="mb-4"><img class="img-fluid rounded" src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="..." /></figure>
-                        <!-- Post content-->
-                        <section class="mb-5">
-                            <p class="fs-5 mb-4"> {{ post.message }} </p>
-                        </section>
                         <div class="card">
                             <img src="https://i.imgur.com/Oco4P6B.png" class="card-img-top" alt="Image describing post category" width="30%" height="30%"/>
                             <div class="card-body">
@@ -61,7 +52,11 @@
                                 {% endif %}
                             </div>
                         </div>
-                    </article>
+                        {% csrf_token %}
+                        <h5><i class="fa-solid fa-heart"> Like</i></h5>
+                        {% if user.id == post.user_id.id %}
+                            <button onclick="deletePost( {{post.post_id}} )"  ><FONT COLOR=red>DELETE POST</FONT> </i> {% csrf_token %}</button>
+                        {% endif %}
                     <!-- Comments section-->
                     <section class="mb-5">
                         <div class="card bg-light">
