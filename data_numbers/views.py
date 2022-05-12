@@ -142,20 +142,17 @@ def get_numbers(request):
 
 
 def search_numbers(request):
-    print("search_numbers")
-    return HttpResponse("search_numbers")
-    # if request.method == "GET":
-    #     prefix = request.GET["prefix"]
-    #     number = request.GET["number"]
-    #     telephone = Telephone.objects.filter(prefix__startswith=prefix, phone__startswith=number)
-    #     print(telephone)
-    #     if telephone:
-    #         post = Post.objects.filter(telephone=telephone.get().telephone_id)
-    #         return redirect(request, "posts/" + post.get().post_id, {})
-    #     else:
-    #         return redirect(request, "post/create", {})
-    # else:
-    #     return HttpResponse("Invalid request")
+    if request.method == "GET":
+        prefix = request.GET["prefix"]
+        number = request.GET["number"]
+        try:
+            telephone = Telephone.objects.get(prefix=prefix, phone=number)
+        except Exception:
+            return HttpResponse("/post/create")
+        post = Post.objects.get(telephone=telephone)
+        return HttpResponse("/posts/" + post.post_id.__str__())
+    else:
+        return HttpResponse("Error")
 
 
 def trendy_posts(request):
