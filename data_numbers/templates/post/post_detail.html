@@ -43,6 +43,8 @@
                             <div class="card-body">
                                 <h5 class="fw-bold"> {{ post.title }} </h5>
                                 <p class="fs-5 mb-4"> {{ post.message }} </p>
+                                {% csrf_token %}
+                                <h5><i class="fa-solid fa-heart"> Like</i></h5>
                                 {% if user.id == post.user_id.id %}
                                     <button class="btn btn-warning" onclick="location.href = '/post/edit/{{post.post_id}}'"
                                     >MODIFY
@@ -52,11 +54,6 @@
                                 {% endif %}
                             </div>
                         </div>
-                        {% csrf_token %}
-                        <h5><i class="fa-solid fa-heart"> Like</i></h5>
-                        {% if user.id == post.user_id.id %}
-                            <button onclick="deletePost( {{post.post_id}} )"  ><FONT COLOR=red>DELETE POST</FONT> </i> {% csrf_token %}</button>
-                        {% endif %}
                     <!-- Comments section-->
                     <section class="mb-5">
                         <div class="card bg-light">
