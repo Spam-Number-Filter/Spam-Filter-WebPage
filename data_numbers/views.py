@@ -16,10 +16,6 @@ from django.template import loader
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView
 
-from data_numbers.forms import ModifyUsernameForm, PostForm, UserRegistrationForm
-from data_numbers.models import Post, Telephone
-from data_numbers.validation.number_validation import NumberValidation
-from data_numbers.validation.number_validation_factory import get_number_validation
 from data_numbers.forms import (
     CommentForm,
     ModifyUsernameForm,
@@ -27,6 +23,8 @@ from data_numbers.forms import (
     UserRegistrationForm,
 )
 from data_numbers.models import Comment, Post, Telephone
+from data_numbers.validation.number_validation import NumberValidation
+from data_numbers.validation.number_validation_factory import get_number_validation
 
 
 def index(request):
