@@ -23,24 +23,24 @@
 {% block content %}
 
     <html lang="en">
-    <body>
+    <body background="/static/images/background.png">
         <!-- Center the page content-->
-        <div class="container mt-5" >
+        <div class="container mt-5" style="color: #d8dce1; " >
             <div class="row">
                 <div class="col-lg-8">
                     <!-- Post content-->
                         <!-- Post header-->
                         <header class="mb-4">
                             <!-- Phone number-->
-                            <h1 class="fw-bolder mb-1"> +{{ post.telephone.prefix }} {{ post.telephone.phone }} </h1>
+                            <h1 class="fw-bolder mb-1" style="color: #b7b8ba"> +{{ post.telephone.prefix }} {{ post.telephone.phone }} </h1>
                             <!-- Post meta content-->
-                            <div class="text-muted fst-italic mb-2">Posted on {{ post.date }} by {{ post.user_id }} </div>
+                            <div class="text-muted fst-italic mb-2" style="color: #a6afb7">Posted on {{ post.date }} by {{ post.user_id }} </div>
                             <!-- Post category-->
                             <a class="badge bg-secondary text-decoration-none link-light" href="#!"> {{ post.category.type }} </a>
                         </header>
-                        <div class="card">
+                        <div class="card" >
                             <img src="https://i.imgur.com/Oco4P6B.png" class="card-img-top" alt="Image describing post category" width="30%" height="30%"/>
-                            <div class="card-body">
+                            <div class="card-body" style="background-color: #212529">
                                 <h5 class="fw-bold"> {{ post.title }} </h5>
                                 <p class="fs-5 mb-4"> {{ post.message }} </p>
                                 {% csrf_token %}
@@ -55,8 +55,8 @@
                             </div>
                         </div>
                     <!-- Comments section-->
-                    <section class="mb-5">
-                        <div class="card bg-light">
+                    <section class="mb-5" style="color: #d8dce1">
+                        <div class="card bg-dark" >
                             <div class="card-body">
                                 <!-- Comment form-->
                                 <form class="mb-4"><textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea></form>
