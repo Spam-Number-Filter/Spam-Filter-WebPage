@@ -1,1 +1,30 @@
-Hola
+<!-- templates/registration/login.html -->
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block style %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+    {% if user.id == post.user_id_id %}
+
+        <form method="POST">{% csrf_token %}
+
+            <!-- form variable -->
+            {{ form.as_p }}
+
+            <input type="submit" name="sumbit">
+        </form>
+    {% else %}
+        {#    Error alert when not authenticated#}
+        <div class="alert alert-danger alert-dismissible d-flex align-items-center fade show">
+            <i class="bi-exclamation-octagon-fill"></i>
+            <strong class="mx-2">Error!</strong> Log in before accessing your account.
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    {% endif %}
+{% endblock %}
