@@ -97,7 +97,8 @@ class PostCreate(CreateView):
         return render(self.request, "post/post_creation.html", {"form": form})
 
     def form_valid(self, form):
-        form.instance.user_id = self.request.user
+        if not self.validate_and_set_user(form):
+            return redirect("login")
         if not PostCreate.check_and_set_fields(self, form):
             return redirect("post_create")
         return super(PostCreate, self).form_valid(form)
@@ -110,6 +111,14 @@ class PostCreate(CreateView):
             or not self.validate_message(form.data["message"])
         ):
             return False
+        return True
+
+    def validate_and_set_user(self, form) -> bool:
+        user = self.request.user
+        if user.id is None:
+            messages.error(self.request, "You must be logged in to create a post")
+            return False
+        form.instance.user_id = user
         return True
 
     def validate_and_set_post_category(self, form) -> bool:
@@ -127,10 +136,17 @@ class PostCreate(CreateView):
         if not validation_result.is_valid:
             error_message = validation_result.error_message
             messages.error(self.request, error_message)
+        elif PostCreate.number_exists(form):
+            messages.error(self.request, "A post with this number already exists")
         else:
             form.instance.user_id = self.request.user
             form.instance.telephone = PostCreate.get_post_creation_telephone(form)
-        return validation_result.is_valid
+        return validation_result.is_valid and not PostCreate.number_exists(form)
+
+    @staticmethod
+    def number_exists(form) -> bool:
+        prefix, suffix = PostCreate.get_prefix_and_suffix(form)
+        return Telephone.objects.get(prefix=prefix, phone=suffix) is not None
 
     def validate_title(self, title) -> bool:
         if not valid_post_title(title).is_valid:
