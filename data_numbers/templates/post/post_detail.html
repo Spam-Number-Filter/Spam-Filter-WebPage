@@ -103,7 +103,7 @@
                                     <button class="btn btn-warning" id="modify" onclick="location.href = '/post/edit/{{post.post_id}}'"
                                     >MODIFY
                                         POST {% csrf_token %}</button>
-                                    <button class="btn btn-danger" onclick="deletePost( {{ post.post_id }} )">DELETE
+                                    <button class="btn btn-danger" id="delete" onclick="deletePost( {{ post.post_id }} )">DELETE
                                         POST </i> {% csrf_token %}</button>
                                 {% endif %}
                             </div>
