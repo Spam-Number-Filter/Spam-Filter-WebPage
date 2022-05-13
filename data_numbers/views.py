@@ -23,7 +23,10 @@ from data_numbers.forms import (
 )
 from data_numbers.models import Category, Comment, Post, Telephone
 from data_numbers.validation.category_validation import valid_category
-from data_numbers.validation.number_validation import NumberValidation
+from data_numbers.validation.number_validation import (
+    NumberValidation,
+    NumberValidationData,
+)
 from data_numbers.validation.number_validation_factory import get_number_validation
 from data_numbers.validation.post_message_validation import valid_post_message
 from data_numbers.validation.post_title_validation import valid_post_title
@@ -133,20 +136,29 @@ class PostCreate(CreateView):
 
     def validate_and_set_post_number(self, form) -> bool:
         validation_result = PostCreate.get_validator(form).valid_number()
+        number_already_posted_or_empty = PostCreate.number_exists(form)
         if not validation_result.is_valid:
             error_message = validation_result.error_message
             messages.error(self.request, error_message)
-        elif PostCreate.number_exists(form):
-            messages.error(self.request, "A post with this number already exists")
+        elif not number_already_posted_or_empty.is_valid:
+            messages.error(self.request, number_already_posted_or_empty.error_message)
         else:
             form.instance.user_id = self.request.user
             form.instance.telephone = PostCreate.get_post_creation_telephone(form)
-        return validation_result.is_valid and not PostCreate.number_exists(form)
+        return validation_result.is_valid and number_already_posted_or_empty.is_valid
 
     @staticmethod
-    def number_exists(form) -> bool:
+    def number_exists(form) -> NumberValidationData:
         prefix, suffix = PostCreate.get_prefix_and_suffix(form)
-        return Telephone.objects.get(prefix=prefix, phone=suffix) is not None
+        if prefix == "":
+            return NumberValidationData(False, "Phone prefix cannot be empty")
+        elif suffix == "":
+            return NumberValidationData(False, "Phone number cannot be empty")
+        if Telephone.objects.filter(prefix=prefix, phone=suffix).count() > 0:
+            return NumberValidationData(
+                False, "A post with this phone number already exists"
+            )
+        return NumberValidationData(True)
 
     def validate_title(self, title) -> bool:
         if not valid_post_title(title).is_valid:
