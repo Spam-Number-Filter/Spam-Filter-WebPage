@@ -8,6 +8,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.core import serializers
 from django.http import HttpResponse
 
 # Create your views here.
@@ -132,6 +133,18 @@ class PostCreate(CreateView):
 class PostDetail(DetailView):
     model = Post
     template_name = "post/post_detail.html"
+    comments = serializers.serialize("python", Comment.objects.all())
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        pk = self.kwargs["pk"]
+        all_comments = Comment.objects.all()
+        wanted_comments = []
+        for comment in all_comments:
+            if comment.post_id.post_id == pk:
+                wanted_comments.append(comment)
+        context["comments"] = wanted_comments
+        return context
 
 
 def get_prefixes(request):
@@ -192,6 +205,7 @@ def get_posts(trendy_posts_dict):
 
 
 def add_comment(request, pk):
+    print("hola")
     if request.method == "POST":
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -203,6 +217,7 @@ def add_comment(request, pk):
             comment.save()
         else:
             messages.success(request, form.errors)
+
         return HttpResponse("/posts/" + str(pk))
     else:
         return HttpResponse("home")
