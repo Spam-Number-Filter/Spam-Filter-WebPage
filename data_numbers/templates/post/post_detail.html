@@ -78,40 +78,37 @@
 
     <html lang="en">
     <body background="/static/images/background.png">
-    <!-- Center the page content-->
-    <div class="container mt-5" style="color: #d8dce1; ">
-        <div class="row">
-            <div class="col-lg-8">
-                <!-- Post content-->
-                <!-- Post header-->
-                <header class="mb-4">
-                    <!-- Phone number-->
-                    <h1 class="fw-bolder mb-1" style="color: #b7b8ba">
-                        +{{ post.telephone.prefix }} {{ post.telephone.phone }} </h1>
-                    <!-- Post meta content-->
-                    <div class="text-muted fst-italic mb-2" style="color: #a6afb7">Posted on {{ post.date }}
-                        by {{ post.user_id }} </div>
-                    <!-- Post category-->
-                    <a class="badge bg-secondary text-decoration-none link-light"
-                       href="#!"> {{ post.category.type }} </a>
-                </header>
-                <div class="card">
-                    <img src="https://i.imgur.com/Oco4P6B.png" class="card-img-top" alt="Image describing post category"
-                         width="30%" height="30%"/>
-                    <div class="card-body" style="background-color: #212529">
-                        <h5 class="fw-bold"> {{ post.title }} </h5>
-                        <p class="fs-5 mb-4"> {{ post.message }} </p>
-                        {% csrf_token %}
-                        <h5><i class="fa-solid fa-heart"> Like</i></h5>
-                        {% if user.id == post.user_id.id %}
-                            <button class="btn btn-warning" onclick="location.href = '/post/edit/{{ post.post_id }}'"
-                            >MODIFY
-                                POST {% csrf_token %}</button>
-                            <button class="btn btn-danger" onclick="deletePost( {{ post.post_id }} )">DELETE
-                                POST </i> {% csrf_token %}</button>
-                        {% endif %}
-                    </div>
-                </div>
+        <!-- Center the page content-->
+        <div class="container mt-5" style="color: #d8dce1; " >
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Post content-->
+                        <!-- Post header-->
+                        <header class="mb-4">
+                            <!-- Phone number-->
+                            <h1 class="fw-bolder mb-1" style="color: #b7b8ba"> +{{ post.telephone.prefix }} {{ post.telephone.phone }} </h1>
+                            <!-- Post meta content-->
+                            <div class="text-muted fst-italic mb-2" style="color: #a6afb7">Posted on {{ post.date }} by {{ post.user_id }} </div>
+                            <!-- Post category-->
+                            <a class="badge bg-secondary text-decoration-none link-light" href="#!"> {{ post.category.type }} </a>
+                        </header>
+                        <div class="card" >
+                            <img src="https://i.imgur.com/Oco4P6B.png" class="card-img-top" alt="Image describing post category" width="30%" height="30%"/>
+                            <div class="card-body" style="background-color: #212529">
+                                <h5 class="fw-bold"> {{ post.title }} </h5>
+                                <p class="fs-5 mb-4"> {{ post.message }} </p>
+                                {% csrf_token %}
+                                <button class="btn btn-info" onclick="submitLike( {{ post.post_id }}, {{ user.id }} )"><i class="fa-solid fa-heart"> Like</i></button>
+                                {% if user.id == post.user_id.id %}
+                                    <button class="btn btn-warning" onclick="location.href = '/post/edit/{{post.post_id}}'"
+                                    >MODIFY
+                                        POST {% csrf_token %}</button>
+                                    <button class="btn btn-danger" onclick="deletePost( {{ post.post_id }} )">DELETE
+                                        POST </i> {% csrf_token %}</button>
+                                {% endif %}
+                            </div>
+                        </div>
+
                 <!-- Comments section-->
                 <section class="mb-5" style="color: #d8dce1">
                     <div class="card bg-dark">
@@ -121,9 +118,9 @@
                             <br/>
                             {% if user.is_authenticated %}
                                 <form class="mb-4">
-                                <textarea class="form-control" id="message" rows="3"
+                                <textarea class="form-control" id="message" name="message" rows="3"
                                           placeholder="Join the discussion and leave a comment!"></textarea>
-                                    <button class="btn btn-secondary" onclick="onSubmitClick()">Submit</button>
+                                    <button class="btn btn-secondary" id="submit-button" onclick="onSubmitClick()">Submit</button>
                                 </form>
                             {% endif %}
                             {% for comment in comments %}

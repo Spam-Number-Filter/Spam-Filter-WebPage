@@ -8,7 +8,6 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.core import serializers
 from django.http import HttpResponse
 
 # Create your views here.
@@ -133,7 +132,6 @@ class PostCreate(CreateView):
 class PostDetail(DetailView):
     model = Post
     template_name = "post/post_detail.html"
-    comments = serializers.serialize("python", Comment.objects.all())
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
