@@ -13,7 +13,6 @@ from django.http import HttpResponse
 # Create your views here.
 from django.shortcuts import redirect, render
 from django.template import loader
-from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, UpdateView
 
 from data_numbers.forms import (
@@ -192,34 +191,6 @@ def get_posts(trendy_posts_dict):
     return ten_trendy_posts
 
 
-class AddCommentView(CreateView):
-    model = Comment
-    form_class = CommentForm
-    template_name = "post/add_comment.html"
-    success_url = reverse_lazy("home")
-
-    def form_valid(self, form):
-        if self.request.method == "POST":
-            form = CommentForm(self.request.POST)
-            if form.is_valid():
-                user = self.request.user.username
-                comment = Comment()
-                comment.post_id = Post.objects.get(pk=self.kwargs["pk"])
-                comment.user_id = User.objects.get(username=user)
-                comment.message = form.get_message()
-                comment.save()
-            else:
-                messages.success(self.request, form.errors)
-            return redirect("post_detail", self.kwargs["pk"])
-        else:
-            return redirect("home")
-
-    # def form_valid(self, form):
-    # form.instance.post_id = Post.objects.get(self.kwargs['pk'])
-    # form.instance.post_id = Post.objects.get(user_id=self.kwargs['pk'])
-    # return super().form_valid(form)
-
-
 def add_comment(request, pk):
     if request.method == "POST":
         form = CommentForm(request.POST)
@@ -232,10 +203,9 @@ def add_comment(request, pk):
             comment.save()
         else:
             messages.success(request, form.errors)
-        return redirect("home")
+        return HttpResponse("/posts/" + str(pk))
     else:
-        print(request)
-        return render(request, "profile.html", {})
+        return HttpResponse("home")
 
 
 def delete_posts(request, pk):

@@ -4,7 +4,6 @@ from django.urls import include, path
 from django.views.generic import TemplateView
 
 from data_numbers.views import (
-    AddCommentView,
     PostCreate,
     PostDetail,
     PostUpdateView,
@@ -57,7 +56,6 @@ urlpatterns = [
         trendy_posts,
         name="trendy",
     ),
-    path("posts/<int:pk>/comment", AddCommentView.as_view(), name="add_comment"),
+    path("posts/<int:pk>/api/add_comment/", add_comment, name="add_comment"),
     path("post/edit/<int:pk>", PostUpdateView.as_view(), name="post_update_form"),
-    path("posts/<int:pk>/comment", add_comment, name="add_comment"),
 ]

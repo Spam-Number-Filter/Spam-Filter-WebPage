@@ -39,6 +39,41 @@
         }
     </script>
 
+    <script>
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        const csrftoken = getCookie('csrftoken');
+
+        function onSubmitClick() {
+            const message = $("#message").val();
+            $.ajax({
+                url: 'api/add_comment/',
+                type: 'POST',
+                headers: {'X-CSRFToken': csrftoken},
+                mode: 'same-origin',
+                data: {
+                    message: message,
+                },
+                success: function (data) {
+                    top.location.href = data;
+                }
+            });
+        }
+    </script>
+
 {% endblock %}
 {% block content %}
 
@@ -79,7 +114,10 @@
                         <div class="card bg-dark" >
                             <div class="card-body">
                                 <!-- Comment form-->
-                                <form class="mb-4"><textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea></form>
+                                <form class="mb-4">
+                                    <textarea class="form-control" id="message" rows="3" placeholder="Join the discussion and leave a comment!"></textarea>
+                                    <button class="btn btn-secondary" onclick="onSubmitClick()">Submit</button>
+                                </form>
                                 <!-- Comment with nested comments-->
                                 <div class="d-flex mb-4">
                                     <!-- Parent comment-->
