@@ -1,4 +1,4 @@
-VALID_CATEGORIES = ["Spam", "Scam", "Advertise"]
+VALID_CATEGORIES = ["spam", "scam", "advertise"]
 
 
 class CategoryValidationData:

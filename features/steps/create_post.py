@@ -1,6 +1,6 @@
 from behave import step, then, when
 
-from data_numbers.models import Category
+from data_numbers.models import Category, Telephone
 
 
 @step('I log in as "user" with password "password"')
@@ -34,15 +34,22 @@ def press_register(context):
 
 @step('I choose Category "Spam"')
 def choose_spam(context):
-    context.browser.select("selector", "Spam")
+    context.browser.select("selector", "spam")
 
 
 @then("I sould see the post details")
 def check_is_on_post_details_as_owner(context):
-    assert context.browser.is_text_present("Home")
+    assert context.browser.find_by_id("modify")
 
 
-@step('There is a "Spam" category created')
-def step_impl(context):
-    Category.objects.create(type="Spam")
-    # category = Category.objects.get(type="Spam")
+@step('There is a telephone number "+34 000112233" created')
+def create_telephone(context):
+    Telephone.objects.create(prefix="34", phone="000112233")
+
+
+@step('There is a category "spam"')
+def create_spam_category(context):
+    try:
+        Category.objects.create(type="spam")
+    except Exception as e:
+        print("Ignoring error {}".format(e))

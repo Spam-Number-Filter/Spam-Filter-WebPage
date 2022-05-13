@@ -5,8 +5,8 @@ Feature: Create post
 
   Background: There is a registered user
     Given Exists a user "user" with password "password"
+    And There is a category "spam"
     And There is a telephone number "+34 000112233" created
-    And There is a "Spam" category created
     And An user is logged in the website
     And I am on the create post page
 
@@ -17,14 +17,14 @@ Feature: Create post
     And I choose Category "Spam"
     And I press "Post"
     Then I sould see the post details
-
+#
   Scenario: Create a post without assigning a category
     When I create a post
       | title       | message       | telephone_prefix | telephone_number |
       | Post title  | Post message  | 43               | 111223344        |
     And I press "Post"
     Then I should see an error message
-
+#
   Scenario: Create a post without a title
     When I create a post
       | title       | message       | telephone_prefix | telephone_number |
@@ -36,16 +36,31 @@ Feature: Create post
   Scenario: Create a post with an already existing phone number
     When I create a post
       | title       | message       | telephone_prefix | telephone_number |
-      | Post title  | Post message  | 43               | 111223344        |
+      | Post title  | Post message  | 34               | 000112233        |
     And I choose Category "Spam"
     And I press "Post"
     Then I should see an error message
 
   Scenario: Create a post without a telephone number
-#     Enter steps here
+    When I create a post
+      | title       | message       | telephone_prefix | telephone_number |
+      | Post title  | Post message  | 34               |                     |
+    And I choose Category "Spam"
+    And I press "Post"
+    Then I should see an error message
 
   Scenario: Create a post without a telephone prefix
-#     Enter steps here
+    When I create a post
+      | title       | message       | telephone_prefix | telephone_number |
+      | Post title  | Post message  |                  | 111223344        |
+    And I choose Category "Spam"
+    And I press "Post"
+    Then I should see an error message
 
   Scenario: Create a post with a non existing phone number
-#     Enter steps here
+    When I create a post
+      | title       | message       | telephone_prefix | telephone_number |
+      | Post title  | Post message  | 34               | 0001122340000000 |
+    And I choose Category "Spam"
+    And I press "Post"
+    Then I should see an error message
