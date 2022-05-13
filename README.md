@@ -46,10 +46,11 @@ python manage.py runserver
 ```
 
 In order to access the sqlite database as admin, the already created superuser can be used. The credentials are the following:
-```
-User: admin
-Password: admin
-```
+
+**User:** admin
+
+**Password:** admin
+
 
 ## Running with docker and using postgres as database 🐳
 
