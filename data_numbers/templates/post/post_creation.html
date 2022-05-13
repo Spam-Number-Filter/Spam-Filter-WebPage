@@ -7,31 +7,32 @@
 
 {% load crispy_forms_tags %}
 {% block content %}
-<html lang="en">
+    <html lang="en">
 
-<head>
-    <!-- Required meta tags-->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Colorlib Templates">
-    <meta name="author" content="Colorlib">
-    <meta name="keywords" content="Colorlib Templates">
+    <head>
+        <!-- Required meta tags-->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="Colorlib Templates">
+        <meta name="author" content="Colorlib">
+        <meta name="keywords" content="Colorlib Templates">
 
-    <!-- Title Page-->
-    <title>Create a post</title>
+        <!-- Title Page-->
+        <title>Create a post</title>
 
-    <!-- Font special for pages-->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+        <!-- Font special for pages-->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i"
+              rel="stylesheet">
 
-    <!-- Main CSS-->
-</head>
+        <!-- Main CSS-->
+    </head>
 
-<body background="/static/images/background.png">
+    <body background="/static/images/background.png">
     <div class="page-wrapper bg-transparent p-t-100 p-b-50">
         <div class="wrapper wrapper--w900">
             <div class="card card-6">
                 <div class="card-heading">
-                    <h2 class="title">Create a post</h2>
+                    <h2 class="title" style="padding-left: 10px">Create a post</h2>
                 </div>
                 <div class="card-body">
                     <form method="post" enctype="multipart/form-data" action="">
@@ -46,7 +47,8 @@
                             <div class="name">Message</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <textarea class="textarea--style-6" name="message" placeholder="Explain the phone call"></textarea>
+                                    <textarea class="textarea--style-6" name="message"
+                                              placeholder="Explain the phone call"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -62,22 +64,23 @@
                             <div class="name">Phone number</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <input class="input--style-6" name="telephone_number" type="tel" placeholder="111223344"></input>
+                                    <input class="input--style-6" name="telephone_number" type="tel"
+                                           placeholder="111223344"></input>
                                 </div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="name">Category</div>
-                                <div class="value">
-                                    <div class="input-group">
-                                        <select class="form-select" name="selector" aria-label="Default select example">
-                                            <option selected>Choose a category</option>
-                                            <option value="spam">Spam</option>
-                                            <option value="advertise">Advertise</option>
-                                            <option value="scam">Scam</option>
-                                        </select>
-                                    </div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <select class="form-select" name="selector" aria-label="Default select example">
+                                        <option selected>Choose a category</option>
+                                        <option value="Spam">Spam</option>
+                                        <option value="Advertise">Advertise</option>
+                                        <option value="Scam">Scam</option>
+                                    </select>
                                 </div>
+                            </div>
                         </div>
                         <div class="card-footer">
                             <button class="btn btn--radius-2 btn--blue-2" value="post" type="submit">Post</button>
@@ -88,8 +91,8 @@
         </div>
     </div>
 
-</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+    </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 
-</html>
-<!-- end document-->
+    </html>
+    <!-- end document-->
 {% endblock %}

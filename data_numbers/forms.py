@@ -67,10 +67,10 @@ class ModifyUsernameForm(UserChangeForm):
         fields = ["username"]
 
 
-class PostForm(ModelForm):
+class CreatePostForm(ModelForm):
     class Meta:
         model = Post
-        exclude = ("post_id", "user_id", "date", "telephone", "category")
+        exclude = ("post_id", "user_id", "date", "telephone", "likes", "category")
 
 
 class CommentForm(ModelForm):

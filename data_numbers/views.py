@@ -17,12 +17,19 @@ from django.views.generic import CreateView, DetailView, UpdateView
 
 from data_numbers.forms import (
     CommentForm,
+    CreatePostForm,
     ModifyUsernameForm,
-    PostForm,
     UserRegistrationForm,
 )
 from data_numbers.models import Category, Comment, Post, Telephone
-from data_numbers.validation.number_validation import NumberValidation
+from data_numbers.validation.category_validation import (
+    CategoryValidationData,
+    valid_category,
+)
+from data_numbers.validation.number_validation import (
+    NumberValidation,
+    NumberValidationData,
+)
 from data_numbers.validation.number_validation_factory import get_number_validation
 
 
@@ -86,24 +93,36 @@ def edit_username(request):
 
 class PostCreate(CreateView):
     model = Post
-    form_class = PostForm
+    form_class = CreatePostForm
     template_name = "post/post_creation.html"
 
     def form_valid(self, form):
         form.instance.user_id = self.request.user
-        form.instance.category = self.getPostCreationCategory(form)
-        if not PostCreate.is_valid_telephone(form):
-            error_message = PostCreate.get_validator(form).valid_number().error_message
-            messages.error(self.request, error_message)
+        if not self.setPostCategory(form).is_valid:
             return redirect("post_create")
+        if not self.setPostNumber(form).is_valid:
+            return redirect("post_create")
+        return super(PostCreate, self).form_valid(form)
+
+    def setPostCategory(self, form) -> CategoryValidationData:
+        category = form.data["selector"]
+        validation_result = valid_category(category)
+        if not validation_result.is_valid:
+            error_message = valid_category(category).error_message
+            messages.error(self.request, error_message)
+        else:
+            form.instance.category = Category.objects.get(type=category)
+        return validation_result
+
+    def setPostNumber(self, form) -> NumberValidationData:
+        validation_result = PostCreate.get_validator(form).valid_number()
+        if not validation_result.is_valid:
+            error_message = validation_result.error_message
+            messages.error(self.request, error_message)
         else:
             form.instance.user_id = self.request.user
             form.instance.telephone = PostCreate.getPostCreationTelephone(form)
-            return super(PostCreate, self).form_valid(form)
-
-    @staticmethod
-    def is_valid_telephone(form):
-        return PostCreate.get_validator(form).valid_number().is_valid
+        return validation_result
 
     @staticmethod
     def get_validator(form) -> NumberValidation:
@@ -123,10 +142,6 @@ class PostCreate(CreateView):
         number = form.data["telephone_number"]
         telephone = Telephone.objects.create(prefix=prefix, phone=number)
         return Telephone.objects.get(telephone_id=telephone.telephone_id)
-
-    def getPostCreationCategory(self, form):
-        category = form.data["selector"]
-        return Category.objects.get(type=category)
 
 
 class PostDetail(DetailView):
