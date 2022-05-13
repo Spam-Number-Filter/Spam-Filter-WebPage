@@ -22,15 +22,11 @@ from data_numbers.forms import (
     UserRegistrationForm,
 )
 from data_numbers.models import Category, Comment, Post, Telephone
-from data_numbers.validation.category_validation import (
-    CategoryValidationData,
-    valid_category,
-)
-from data_numbers.validation.number_validation import (
-    NumberValidation,
-    NumberValidationData,
-)
+from data_numbers.validation.category_validation import valid_category
+from data_numbers.validation.number_validation import NumberValidation
 from data_numbers.validation.number_validation_factory import get_number_validation
+from data_numbers.validation.post_message_validation import valid_post_message
+from data_numbers.validation.post_title_validation import valid_post_title
 
 
 def index(request):
@@ -96,15 +92,27 @@ class PostCreate(CreateView):
     form_class = CreatePostForm
     template_name = "post/post_creation.html"
 
+    def form_invalid(self, form):
+        PostCreate.check_and_set_fields(self, form)
+        return render(self.request, "post/post_creation.html", {"form": form})
+
     def form_valid(self, form):
         form.instance.user_id = self.request.user
-        if not self.setPostCategory(form).is_valid:
-            return redirect("post_create")
-        if not self.setPostNumber(form).is_valid:
+        if not PostCreate.check_and_set_fields(self, form):
             return redirect("post_create")
         return super(PostCreate, self).form_valid(form)
 
-    def setPostCategory(self, form) -> CategoryValidationData:
+    def check_and_set_fields(self, form) -> bool:
+        if (
+            not self.validate_and_set_post_category(form)
+            or not self.validate_and_set_post_number(form)
+            or not self.validate_title(form.data["title"])
+            or not self.validate_message(form.data["message"])
+        ):
+            return False
+        return True
+
+    def validate_and_set_post_category(self, form) -> bool:
         category = form.data["selector"]
         validation_result = valid_category(category)
         if not validation_result.is_valid:
@@ -112,17 +120,31 @@ class PostCreate(CreateView):
             messages.error(self.request, error_message)
         else:
             form.instance.category = Category.objects.get(type=category)
-        return validation_result
+        return validation_result.is_valid
 
-    def setPostNumber(self, form) -> NumberValidationData:
+    def validate_and_set_post_number(self, form) -> bool:
         validation_result = PostCreate.get_validator(form).valid_number()
         if not validation_result.is_valid:
             error_message = validation_result.error_message
             messages.error(self.request, error_message)
         else:
             form.instance.user_id = self.request.user
-            form.instance.telephone = PostCreate.getPostCreationTelephone(form)
-        return validation_result
+            form.instance.telephone = PostCreate.get_post_creation_telephone(form)
+        return validation_result.is_valid
+
+    def validate_title(self, title) -> bool:
+        if not valid_post_title(title).is_valid:
+            error_message = valid_post_title(title).error_message
+            messages.error(self.request, error_message)
+            return False
+        return True
+
+    def validate_message(self, message) -> bool:
+        if not valid_post_message(message).is_valid:
+            error_message = valid_post_message(message).error_message
+            messages.error(self.request, error_message)
+            return False
+        return True
 
     @staticmethod
     def get_validator(form) -> NumberValidation:
@@ -137,7 +159,7 @@ class PostCreate(CreateView):
         )
 
     @staticmethod
-    def getPostCreationTelephone(form) -> Telephone:
+    def get_post_creation_telephone(form) -> Telephone:
         prefix = form.data["telephone_prefix"]
         number = form.data["telephone_number"]
         telephone = Telephone.objects.create(prefix=prefix, phone=number)
