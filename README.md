@@ -35,7 +35,6 @@ Once installed, you have to run the following commands for creating and migratin
 
 ```bash
 python manage.py collectstatic --noinput
-python manage.py makemigrations
 python manage.py migrate --run-syncdb 
 python manage.py migrate
 ```
