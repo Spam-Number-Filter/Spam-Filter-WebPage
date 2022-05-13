@@ -210,10 +210,22 @@ def add_comment(request, pk):
 
 def delete_posts(request, pk):
     post_id = request.POST["post_id"]
-    print(post_id)
     post = Post.objects.get(post_id=post_id)
     post.delete()
     return HttpResponse("/")
+
+
+def submit_like(request, pk):
+    post_id = request.POST["post_id"]
+    user_id = request.POST["user_id"]
+    post = Post.objects.get(post_id=post_id)
+    likes = post.likes.all()
+    if user_id in likes:
+        post.likes.remove(user_id)
+        return HttpResponse("/posts/" + post_id)
+    else:
+        post.likes.add(user_id)
+        return HttpResponse("/posts/" + post_id)
 
 
 class PostUpdateView(UpdateView):

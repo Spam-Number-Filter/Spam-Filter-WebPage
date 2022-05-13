@@ -15,6 +15,7 @@ from data_numbers.views import (
     login_user,
     register_user,
     search_numbers,
+    submit_like,
     trendy_posts,
 )
 
@@ -49,6 +50,7 @@ urlpatterns = [
     path("api/get_numbers/", get_numbers, name="get_places"),
     path("api/search_number/", search_numbers, name="search_numbers"),
     path("posts/<int:pk>/api/delete_post/", delete_posts, name="delete_posts"),
+    path("posts/<int:pk>/api/submit_like/", submit_like, name="submit_like"),
     # Post details
     path("posts/<int:pk>/", PostDetail.as_view(), name="post_detail"),
     path(
