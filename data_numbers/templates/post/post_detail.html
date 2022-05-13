@@ -4,11 +4,31 @@
 {% block style %}
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/post_detail.css' %}">
+
     <script>
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        const csrftoken = getCookie('csrftoken');
+
         function deletePost(post_id) {
             $.ajax({
                 url: 'api/delete_post/',
                 type: 'POST',
+                headers: {'X-CSRFToken': csrftoken},
+                mode: 'same-origin',
                 data: {
                     post_id: post_id
                 },

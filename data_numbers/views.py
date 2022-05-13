@@ -14,7 +14,6 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.template import loader
 from django.urls import reverse_lazy
-from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import CreateView, DetailView, UpdateView
 
 from data_numbers.forms import (
@@ -239,7 +238,6 @@ def add_comment(request, pk):
         return render(request, "profile.html", {})
 
 
-@csrf_exempt
 def delete_posts(request, pk):
     post_id = request.POST["post_id"]
     print(post_id)
