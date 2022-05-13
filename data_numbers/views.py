@@ -220,12 +220,22 @@ def submit_like(request, pk):
     user_id = request.POST["user_id"]
     post = Post.objects.get(post_id=post_id)
     likes = post.likes.all()
-    if user_id in likes:
-        post.likes.remove(user_id)
+    if remove_if_liked(likes, user_id, post, request):
         return HttpResponse("/posts/" + post_id)
     else:
-        post.likes.add(user_id)
-        return HttpResponse("/posts/" + post_id)
+        return add_like(user_id, post_id, post)
+
+
+def remove_if_liked(likes, user_id, post, request):
+    for user_like in likes:
+        if str(request.user.username) == str(user_like):
+            post.likes.remove(user_id)
+            return True
+
+
+def add_like(user_id, post_id, post):
+    post.likes.add(user_id)
+    return HttpResponse("/posts/" + post_id)
 
 
 class PostUpdateView(UpdateView):
