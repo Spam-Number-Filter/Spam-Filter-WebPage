@@ -3,7 +3,7 @@ from splinter.browser import Browser
 
 
 def before_all(context):
-    context.browser = Browser("firefox", headless=True)
+    context.browser = Browser("firefox", headless=False)
     context.db = User.objects
 
 
