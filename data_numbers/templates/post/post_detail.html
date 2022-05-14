@@ -98,7 +98,7 @@
                                 <h5 class="fw-bold"> {{ post.title }} </h5>
                                 <p class="fs-5 mb-4"> {{ post.message }} </p>
                                 {% csrf_token %}
-                                <button class="btn btn-info" onclick="submitLike( {{ post.post_id }}, {{ user.id }} )"><i class="fa-solid fa-heart"> Like</i></button>
+                                <button class="btn btn-info" id="like_button" onclick="submitLike( {{ post.post_id }}, {{ user.id }} )"><i class="fa-solid fa-heart"> Like</i></button>
                                 {% if user.id == post.user_id.id %}
                                     <button class="btn btn-warning" id="modify" onclick="location.href = '/post/edit/{{post.post_id}}'"
                                     >MODIFY
