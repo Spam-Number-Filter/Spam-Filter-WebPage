@@ -289,8 +289,14 @@ def add_comment(request, pk):
 def delete_posts(request, pk):
     post_id = request.POST["post_id"]
     post = Post.objects.get(post_id=post_id)
+    delete_telephone(post_id)
     post.delete()
     return HttpResponse("/")
+
+
+def delete_telephone(post_id):
+    telephone = Post.objects.get(post_id=post_id).telephone
+    telephone.delete()
 
 
 def submit_like(request, pk):
