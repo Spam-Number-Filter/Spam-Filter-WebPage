@@ -35,12 +35,12 @@ def logged_user(context):
 
 @step('I am on the post "1" page')
 def visit_post(context):
-    context.browser.visit(context.get_url("/posts/1"))
+    context.browser.visit(context.get_url("/post/1/"))
 
 
 @when("I click on the comment")
 def step_impl(context):
-    context.browser.find_by_name("message").first.click()
+    context.browser.find_by_id("message").first.click()
 
 
 @when("I write a comment")
@@ -57,5 +57,4 @@ def press_submit(context):
 @then('I should see the comment "comment1"')
 def assert_comment_exists(context):
     # TODO: it will fail until Pablo fixes the problem of creating a comment with firefox
-    context.browser.visit(context.get_url("/posts/1"))
     assert context.browser.is_element_present_by_id("comment-div")
