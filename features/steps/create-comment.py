@@ -1,4 +1,4 @@
-from behave import given, step, when
+from behave import given, step, then, when
 from django.contrib.auth.models import User
 
 from data_numbers.models import Category, Post, Telephone
@@ -35,14 +35,27 @@ def logged_user(context):
 
 @step('I am on the post "1" page')
 def visit_post(context):
-    context.browser.visit(context.get_url("/posts/1/"))
+    context.browser.visit(context.get_url("/posts/1"))
+
+
+@when("I click on the comment")
+def step_impl(context):
+    context.browser.find_by_name("message").first.click()
 
 
 @when("I write a comment")
 def write_comment(context):
-    context.browser.fill("message", "new comment")
+    message = context.browser.find_by_name("message").first
+    message.fill("new message")
 
 
 @step('I press "Submit"')
-def step_impl(context):
+def press_submit(context):
     context.browser.find_by_id("submit-button").click()
+
+
+@then('I should see the comment "comment1"')
+def assert_comment_exists(context):
+    # TODO: it will fail until Pablo fixes the problem of creating a comment with firefox
+    context.browser.visit(context.get_url("/posts/1"))
+    assert context.browser.is_element_present_by_id("comment-div")

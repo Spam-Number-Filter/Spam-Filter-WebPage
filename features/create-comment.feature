@@ -10,5 +10,7 @@ Feature: Create a comment on a post
     And I am on the post "1" page
 
   Scenario: Create comment
-    When I write a comment
-    Then I press "Submit"
+    When I click on the comment
+    And I write a comment
+    And i press "Submit"
+    Then I should see the comment "comment1"
