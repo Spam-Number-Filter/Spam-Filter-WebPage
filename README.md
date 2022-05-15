@@ -9,23 +9,28 @@
 
 ## Summary
 
-  - [Getting Started](#getting-started-)
-  - [Running locally with docker](#running-with-docker-and-using-postgres-as-database-)
-  - [Deployment to Heroku](#deploy-to-heroku-)
-  - [License](#license-)
-  - [Contributing](#contributing-)
+- [Getting Started](#getting-started-)
+- [Running locally with docker](#running-with-docker-and-using-postgres-as-database-)
+- [Deployment to Heroku](#deploy-to-heroku-)
+- [License](#license-)
+- [Contributing](#contributing-)
 
 ## Getting Started 🔍
-These instructions will give you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on deploying the project on a live system and the docker notes for running the project on a container.
 
-First of all, be aware that it is recommended to create a python virtual environment for installing the project dependencies!
+These instructions will give you a copy of the project up and running on your local machine for development and testing
+purposes. See deployment for notes on deploying the project on a live system and the docker notes for running the
+project on a container.
+
+First of all, be aware that it is recommended to create a python virtual environment for installing the project
+dependencies!
 After you have created the environment, run the following command for installing the running dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-If you want to install the development dependencies (which installs the linter, test runner, test coverage tools, etc) run the following command:
+If you want to install the development dependencies (which installs the linter, test runner, test coverage tools, etc)
+run the following command:
 
 ```bash
 pip install -r .github/dev-requirements.txt
@@ -45,12 +50,12 @@ Finally, you can run the server with the following command:
 python manage.py runserver
 ```
 
-In order to access the sqlite database as admin, the already created superuser can be used. The credentials are the following:
+In order to access the sqlite database as admin, the already created superuser can be used. The credentials are the
+following:
 
 **User:** admin
 
 **Password:** admin
-
 
 ## Running with docker and using postgres as database 🐳
 
@@ -65,26 +70,35 @@ Then, start the docker container with the following command:
 ```bash
 docker-compose up
 ```
-When booting the containers (both the project one and the data base one) for the first time, it may fail due to bad order of execution. If that happens, booting a second time should fix it.
-When the docker has finished booting and everything is okey, there will be an instance of django running on localhost at port 8000. 
+
+When booting the containers (both the project one and the data base one) for the first time, it may fail due to bad
+order of execution. If that happens, booting a second time should fix it.
+When the docker has finished booting and everything is okey, there will be an instance of django running on localhost at
+port 8000.
 
 ### Adding a DB superuser inside the docker container 👤💾
 
-Before accessing the data base (as admin), an admin user must be created. In order to create it inside the django instance use: 
+Before accessing the data base (as admin), an admin user must be created. In order to create it inside the django
+instance use:
 
 ```bash
 docker exec -it django python manage.py createsuperuser
 ```
 
-
 ## Deploy to Heroku 🌎
+
 For deploying to heroku, we've configured two github workflows which are run in the following contexts:
-  - Main workflow: When a commit get's pushed to the master branch, it will deploy the current branch to the heroku production environment.
-  - Develop workflow: When a commit get's pushed to the develop branch, it will deploy the current branch to the heroku development environment.
+
+- Main workflow: When a commit get's pushed to the master branch, it will deploy the current branch to the heroku
+  production environment.
+- Develop workflow: When a commit get's pushed to the develop branch, it will deploy the current branch to the heroku
+  development environment.
 
 ## License 📖
+
 The project is licensed under the GNU General Public License v3.0. See the [LICENSE](LICENSE) file for more information.
 
-
 ## Contributing 🧑‍🤝‍🧑
-Please read [the CONTRIBUTING.md](.github/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+
+Please read [the CONTRIBUTING.md](.github/CONTRIBUTING.md) for details on our code of conduct, and the process for
+submitting pull requests to us.

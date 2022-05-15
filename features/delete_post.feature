@@ -9,8 +9,8 @@ Feature: Delete post
     And An user is logged in the website
     And I am on the create post page
     When I create a post
-      | title       | message       | telephone_prefix | telephone_number |
-      | Post title  | Post message  | 47               | 111223344        |
+      | title      | message      | telephone_prefix | telephone_number |
+      | Post title | Post message | 47               | 111223344        |
     And I choose Category "Spam"
     And I press "Post"
 

@@ -1,4 +1,5 @@
 @import url('base.css');
+
 .edit_username_button {
     border: none;
     outline: none;
@@ -16,6 +17,6 @@
     justify-content: center;
 }
 
-.username_on_account{
+.username_on_account {
     align-content: center;
 }

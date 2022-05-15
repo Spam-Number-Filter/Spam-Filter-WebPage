@@ -1,7 +1,7 @@
 Feature: Valid Logout User
-In order to logout an user from the website
-As a user
-I want to logout to leave the webpage
+  In order to logout an user from the website
+  As a user
+  I want to logout to leave the webpage
 
   Background: There's an user registered
     Given Exists a user "user" with password "password"

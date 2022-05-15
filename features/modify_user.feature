@@ -3,8 +3,8 @@ Feature: modify user
   As a user
   I want to modify the current user data
 
-    Background: There's an user registered
-      Given Exists a user "user1" with password "password1"
+  Background: There's an user registered
+    Given Exists a user "user1" with password "password1"
 
 
   Scenario: User modifies username
