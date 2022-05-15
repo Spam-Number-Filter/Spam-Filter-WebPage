@@ -279,25 +279,25 @@ def add_comment(request, pk):
             new_comment.save()
         else:
             messages.success(request, form.errors)
-        return HttpResponse("/posts/" + str(pk) + "/")
-
+        return redirect("/post/" + str(pk) + "/")
+    else:
+        return redirect("home")
 
 def delete_comment(request, pk):
     if request.method == "POST":
         comment_id = request.POST["comment_id"]
         comment = Comment.objects.get(pk=comment_id)
         comment.delete()
-        return HttpResponse("/posts/" + str(pk))
+        return redirect("/post/" + str(pk) + '/')
     else:
-        return HttpResponse("home")
+        return redirect("home")
 
 
-def delete_posts(request, pk):
-    post_id = request.POST["post_id"]
+def delete_posts(request, post_id):
     post = Post.objects.get(post_id=post_id)
     delete_telephone(post_id)
     post.delete()
-    return HttpResponse("/")
+    return redirect("home")
 
 
 def delete_telephone(post_id):
@@ -305,13 +305,11 @@ def delete_telephone(post_id):
     telephone.delete()
 
 
-def submit_like(request, pk):
-    post_id = request.POST["post_id"]
-    user_id = request.POST["user_id"]
+def submit_like(request, post_id, user_id):
     post = Post.objects.get(post_id=post_id)
     likes = post.likes.all()
     if remove_if_liked(likes, user_id, post, request):
-        return HttpResponse("/post/" + post_id + "/")
+        return redirect("/posts/" + str(post_id))
     else:
         return add_like(user_id, post_id, post)
 
@@ -325,7 +323,7 @@ def remove_if_liked(likes, user_id, post, request):
 
 def add_like(user_id, post_id, post):
     post.likes.add(user_id)
-    return HttpResponse("/post/" + post_id + "/")
+    return redirect("/post/" + str(post_id) + "/")
 
 
 class PostUpdateView(UpdateView):

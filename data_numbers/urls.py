@@ -50,8 +50,12 @@ urlpatterns = [
     path("api/get_prefixes/", get_prefixes, name="get_prefixes"),
     path("api/get_numbers/", get_numbers, name="get_places"),
     path("api/search_number/", search_numbers, name="search_numbers"),
-    path("post/<int:pk>/api/delete_post/", delete_posts, name="delete_posts"),
-    path("post/<int:pk>/api/submit_like/", submit_like, name="submit_like"),
+    path("post/<int:post_id>/api/delete_post/", delete_posts, name="delete_posts"),
+    path(
+        "post/<int:post_id>/api/submit_like/<int:user_id>/",
+        submit_like,
+        name="submit_like",
+    ),
     # Post details
     path("post/<int:pk>/", PostDetail.as_view(), name="post_detail"),
     path(
