@@ -28,10 +28,13 @@
                             <div class="card-body" style="background-color: #212529">
                                 <h5 class="fw-bold"> {{ post.title }} </h5>
                                 <p class="fs-5 mb-4"> {{ post.message }} </p>
+                                    <img src="{{ post.image }}" class="img-fluid" alt="" width="30%" height="30%"/>
+                                {% if user.is_authenticated %}
                                 <form action="{% url 'submit_like' post.post_id user.id %}" method=POST style="margin-bottom: 10px">
                                     {% csrf_token %}
                                     <button class="btn btn-info" id="like_button"><i class="fa-solid fa-heart">Like</i></button>
                                 </form>
+                                {% endif %}
                                 {% csrf_token %}
                                 {% if user.id == post.user_id.id %}
                                     <button class="btn btn-warning" id="modify" style="margin-bottom: 10px" onclick="location.href = '/post/edit/{{post.post_id}}'">MODIFY POST {% csrf_token %}</button>
