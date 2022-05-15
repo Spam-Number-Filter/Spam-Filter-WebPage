@@ -297,6 +297,7 @@ def delete_comment(request, comment_id):
 def delete_posts(request, post_id):
     post = Post.objects.get(post_id=post_id)
     delete_telephone(post_id)
+    delete_comments(post_id)
     post.delete()
     return redirect("home")
 
@@ -304,6 +305,12 @@ def delete_posts(request, post_id):
 def delete_telephone(post_id):
     telephone = Post.objects.get(post_id=post_id).telephone
     telephone.delete()
+
+
+def delete_comments(post_id):
+    comments = Comment.objects.filter(post_id=post_id)
+    for comment in comments:
+        comment.delete()
 
 
 def submit_like(request, post_id, user_id):
