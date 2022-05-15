@@ -28,38 +28,50 @@
     </head>
 
     <body background="/static/images/background.png">
-    <div class="page-wrapper bg-transparent p-t-100 p-b-50">
-        <div class="wrapper wrapper--w900">
-            <div class="card card-6">
-                <div class="card-heading">
-                    <h2 class="title" style="padding-left: 10px" >Edit a post</h2>
-                </div>
-                <div class="card-body">
-                    <form method="post" enctype="multipart/form-data" action="">
-                        {% csrf_token %}
-                        <div class="form-row">
-                            <div class="name">Title</div>
-                            <div class="value">
-                                <input class="input--style-6" name="title" placeholder="Title of the post">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="name">Message</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    <textarea class="textarea--style-6" name="message"
-                                              placeholder="Explain the phone call"></textarea>
+
+    {% if user.is_authenticated %}
+
+        <div class="page-wrapper bg-transparent p-t-100 p-b-50">
+            <div class="wrapper wrapper--w900">
+                <div class="card card-6">
+                    <div class="card-heading">
+                        <h2 class="title" style="padding-left: 10px">Edit a post</h2>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" enctype="multipart/form-data" action="">
+                            {% csrf_token %}
+                            <div class="form-row">
+                                <div class="name">Title</div>
+                                <div class="value">
+                                    <input class="input--style-6" name="title" placeholder="Title of the post">
                                 </div>
                             </div>
-                        </div>
-                        <div class="card-footer">
-                            <button class="btn btn--radius-2 btn--blue-2" type="submit">Submit</button>
-                        </div>
-                    </form>
+                            <div class="form-row">
+                                <div class="name">Message</div>
+                                <div class="value">
+                                    <div class="input-group">
+                                    <textarea class="textarea--style-6" name="message"
+                                              placeholder="Explain the phone call"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button id="Submit" class="btn btn--radius-2 btn--blue-2" type="submit">Submit</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+
+    {% else %}
+        {#    Error alert when not authenticated#}
+        <div class="alert alert-danger alert-dismissible d-flex align-items-center fade show">
+            <i class="bi-exclamation-octagon-fill"></i>
+            <strong class="mx-2">Error!</strong> Log in before accessing your account.
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    {% endif %}
 
     <!-- Jquery JS-->
     <script src="vendor/jquery/jquery.min.js"></script>

@@ -59,5 +59,5 @@ urlpatterns = [
         name="trendy",
     ),
     path("posts/<int:pk>/api/add_comment/", add_comment, name="add_comment"),
-    path("post/edit/<int:pk>", PostUpdateView.as_view(), name="post_update_form"),
+    path("post/edit/<int:pk>/", PostUpdateView.as_view(), name="post_update_form"),
 ]
