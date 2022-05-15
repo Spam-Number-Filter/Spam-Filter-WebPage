@@ -41,7 +41,7 @@ class ApiNumberValidation(NumberValidation):
 
     def valid_number(self) -> NumberValidationData:
         response: Response = requests.get(self.api_string)
-        if response.status_code == 200:
+        if response.status_code != 200:
             return NumberValidationData(False, "There was an error with the API call")
         return ApiNumberValidation.parse_response(response)
 
