@@ -18,14 +18,3 @@ Feature: Delete comment
     Given I write a new comment
     When I click on the delete comment button
     Then I souldn't see my comment anymore
-
-  Scenario: Try to delete other user's comment
-    Given I logout
-    And I login as user "admin" with password "admin"
-    And I go to the post
-    And I add a comment to the first post
-    And I logout
-    And I log in as "user" with password "password"
-    And I go to the post
-    Then I shouldn't see a delete button inside admin's comment
-

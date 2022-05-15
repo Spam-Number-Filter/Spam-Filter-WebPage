@@ -3,13 +3,14 @@ from behave import given, step, then, when
 
 @given("I write a new comment")
 def write_comment(context):
+    context.browser.find_by_name("message").first.click()
     context.browser.fill("message", "My own comment")
-    context.browser.find_by_id("submit-button").click()
+    context.browser.find_by_id("submitbutton").click()
 
 
 @when("I click on the delete comment button")
 def click_delete(context):
-    context.browser.find_by_css(".btn-outline-danger").first.click()
+    context.browser.find_by_id("delete-comment").first.click()
 
 
 @then("I souldn't see my comment anymore")
@@ -35,13 +36,14 @@ def login(context, username, password):
 
 @step("I add a comment to the first post")
 def add_comment_as_admin(context):
-    message = context.browser.find_by_name("message").first
-    message.fill("Admin's comment")
-    context.browser.find_by_id("submit-button").click()
+    context.browser.find_by_name("message").first.click()
+    context.browser.fill("message", "Admin's comment")
+    context.browser.find_by_id("submitbutton").click()
 
 
 @step("I go to the post")
 def go_to_post(context):
+    # context.browser.visit(context.get_url("/post/1/"))
     context.browser.visit(context.get_url("/trendy"))
     context.browser.find_by_css(".col-md-8").first.click()
 
