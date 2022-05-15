@@ -38,6 +38,22 @@
             });
         }
 
+
+        function deleteComment(comment_id) {
+            $.ajax({
+                url: 'api/delete_comment/',
+                type: 'POST',
+                headers: {'X-CSRFToken': csrftoken},
+                mode: 'same-origin',
+                data: {
+                    comment_id: comment_id
+                },
+                success: function (data) {
+                    top.location.href = data;
+                }
+            });
+        }
+
         function submitLike(post_id, user_id) {
             $.ajax({
                 url: 'api/submit_like/',
@@ -95,7 +111,7 @@
                     <a class="badge bg-secondary text-decoration-none link-light"
                        href="#!"> {{ post.category.type }} </a>
                 </header>
-                <div class="card">
+                <div class="card" style="background-color: transparent">
                     <img src="https://i.imgur.com/Oco4P6B.png" class="card-img-top" alt="Image describing post category"
                          width="30%" height="30%"/>
                     <div class="card-body" style="background-color: #212529">
@@ -117,7 +133,7 @@
                 </div>
 
                 <!-- Comments section-->
-                <section class="mb-5" style="color: #d8dce1">
+                <section class="mb-5" style="color: #d8dce1; margin-top: 30px;">
                     <div class="card bg-dark">
                         <div class="card-body">
                             <!-- Comment form-->
@@ -140,8 +156,17 @@
                                     <div class="ms-3">
                                         <div class="fw-bold">{{ comment.user_id }}</div>
                                         {{ comment.message }}
+                                        {% csrf_token %}
+                                    </div>
+                                    <div>
                                     </div>
                                 </div>
+                                {% if user.id == comment.user_id.id %}
+                                    <button style="align-content: end; font-size: 12px; text-align: end; float: right"
+                                            class="btn btn-outline-danger" id="delete"
+                                            onclick="deleteComment( {{ comment.pk }} )">DELETE
+                                        </i> {% csrf_token %}</button>
+                                {% endif %}
                                 <br/>
                             {% endfor %}
                         </div>

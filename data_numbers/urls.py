@@ -8,6 +8,7 @@ from data_numbers.views import (
     PostDetail,
     PostUpdateView,
     add_comment,
+    delete_comment,
     delete_posts,
     edit_username,
     get_numbers,
@@ -58,6 +59,7 @@ urlpatterns = [
         trendy_posts,
         name="trendy",
     ),
-    path("post/<int:pk>/api/add_comment/", add_comment, name="add_comment"),
+    path("posts/<int:pk>/api/add_comment/", add_comment, name="add_comment"),
+    path("posts/<int:pk>/api/delete_comment/", delete_comment, name="delete_comment"),
     path("post/edit/<int:pk>/", PostUpdateView.as_view(), name="post_update_form"),
 ]
