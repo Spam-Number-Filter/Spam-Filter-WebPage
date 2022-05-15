@@ -5,7 +5,7 @@ from data_numbers.models import Category
 
 
 def before_all(context):
-    context.browser = Browser("firefox", headless=True)
+    context.browser = Browser("firefox", headless=False)
     context.db = User.objects
     context.db_categories = Category.objects
 
