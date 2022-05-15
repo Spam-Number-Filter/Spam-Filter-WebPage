@@ -23,18 +23,18 @@
                             <!-- Post category-->
                             <a class="badge bg-secondary text-decoration-none link-light" href="#!"> {{ post.category.type }} </a>
                         </header>
-                        <div class="card" >
+                        <div class="card" style="background-color: transparent" >
                             <img src="https://i.imgur.com/Oco4P6B.png" class="card-img-top" alt="Image describing post category" width="30%" height="30%"/>
                             <div class="card-body" style="background-color: #212529">
                                 <h5 class="fw-bold"> {{ post.title }} </h5>
                                 <p class="fs-5 mb-4"> {{ post.message }} </p>
-                                <form action="{% url 'submit_like' post.post_id user.id %}" method=POST>
+                                <form action="{% url 'submit_like' post.post_id user.id %}" method=POST style="margin-bottom: 10px">
                                     {% csrf_token %}
                                     <button class="btn btn-info" id="like_button"><i class="fa-solid fa-heart">Like</i></button>
                                 </form>
                                 {% csrf_token %}
                                 {% if user.id == post.user_id.id %}
-                                    <button class="btn btn-warning" id="modify" onclick="location.href = '/post/edit/{{post.post_id}}'">MODIFY POST {% csrf_token %}</button>
+                                    <button class="btn btn-warning" id="modify" style="margin-bottom: 10px" onclick="location.href = '/post/edit/{{post.post_id}}'">MODIFY POST {% csrf_token %}</button>
                                     <form action="{% url 'delete_posts' post.post_id %}" method=POST>
                                         {% csrf_token %}
                                         <button class="btn btn-danger" id="delete">DELETE POST {% csrf_token %}</button>
@@ -54,8 +54,8 @@
                                 <form action="{% url 'add_comment' post.post_id %}" method=POST>
                                 {% csrf_token %}
                                 <textarea class="form-control" id="message" name="message" rows="3"
-                                          placeholder="Join the discussion and leave a comment!"></textarea>
-                                    <button class="btn btn-secondary" id="submitbutton">Submit</button>
+                                          placeholder="Join the discussion and leave a comment!" style="margin-bottom: 10px"></textarea>
+                                    <button class="btn btn-secondary" style="margin-bottom: 10px" id="submitbutton">Submit</button>
                                 </form>
                             {% endif %}
                             {% for comment in comments %}
