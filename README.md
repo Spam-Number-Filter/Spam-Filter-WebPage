@@ -87,4 +87,4 @@ The project is licensed under the GNU General Public License v3.0. See the [LICE
 
 
 ## Contributing 🧑‍🤝‍🧑
-Please read [CONTRIBUTING.md](.github/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [the CONTRIBUTING.md](.github/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
