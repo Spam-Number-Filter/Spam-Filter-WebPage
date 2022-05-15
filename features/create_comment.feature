@@ -13,4 +13,4 @@ Feature: Create a comment on a post
     When I click on the comment
     And I write a comment
     And i press "Submit"
-    Then I should see the comment "comment1"
+    Then I should see the comment

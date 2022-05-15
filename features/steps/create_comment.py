@@ -51,10 +51,10 @@ def write_comment(context):
 
 @step('I press "Submit"')
 def press_submit(context):
-    context.browser.find_by_id("submit-button").click()
+    context.browser.find_by_id("submitbutton").click()
 
 
-@then('I should see the comment "comment1"')
+@then("I should see the comment")
 def assert_comment_exists(context):
     # TODO: it will fail until Pablo fixes the problem of creating a comment with firefox
     assert context.browser.is_element_present_by_id("comment-div")
