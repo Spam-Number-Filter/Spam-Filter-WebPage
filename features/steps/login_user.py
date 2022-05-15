@@ -13,7 +13,7 @@ def login_user_admin_admin(context):
 
 
 def login(context, username, password):
-    context.browser.visit(context.get_url("/accounts/login"))
+    context.browser.visit(context.get_url("/accounts/login/"))
     context.browser.fill("username", username)
     context.browser.fill("password", password)
 

@@ -44,9 +44,9 @@ def no_edit_input(context):
 
 @then("I should the post with the new title and message")
 def new_title_message(context):
-    # Ignore the post number. Ex: /posts/[1/]
+    # Ignore the post number. Ex: /post/[1/]
     no_post_browser_url = context.browser.url[:-2]
-    assert no_post_browser_url == context.get_url("/posts/")
+    assert no_post_browser_url == context.get_url("/post/")
     assert context.browser.is_text_present("New title")
     assert context.browser.is_text_present("New message")
 

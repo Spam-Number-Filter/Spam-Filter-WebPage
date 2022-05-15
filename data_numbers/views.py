@@ -236,9 +236,9 @@ def search_numbers(request):
         try:
             telephone = Telephone.objects.get(prefix=prefix, phone=number)
         except Exception:
-            return HttpResponse("/post/create")
+            return HttpResponse("/post/create/")
         post = Post.objects.get(telephone=telephone)
-        return HttpResponse("/posts/" + post.post_id.__str__())
+        return HttpResponse("/post/" + post.post_id.__str__() + "/")
     else:
         return HttpResponse("Error")
 
@@ -281,7 +281,7 @@ def add_comment(request, pk):
         else:
             messages.success(request, form.errors)
 
-        return HttpResponse("/posts/" + str(pk))
+        return HttpResponse("/post/" + str(pk) + "/")
     else:
         return HttpResponse("home")
 
@@ -305,7 +305,7 @@ def submit_like(request, pk):
     post = Post.objects.get(post_id=post_id)
     likes = post.likes.all()
     if remove_if_liked(likes, user_id, post, request):
-        return HttpResponse("/posts/" + post_id)
+        return HttpResponse("/post/" + post_id + "/")
     else:
         return add_like(user_id, post_id, post)
 
@@ -319,7 +319,7 @@ def remove_if_liked(likes, user_id, post, request):
 
 def add_like(user_id, post_id, post):
     post.likes.add(user_id)
-    return HttpResponse("/posts/" + post_id)
+    return HttpResponse("/post/" + post_id + "/")
 
 
 class PostUpdateView(UpdateView):

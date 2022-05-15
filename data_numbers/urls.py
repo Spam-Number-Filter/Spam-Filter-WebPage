@@ -35,7 +35,7 @@ urlpatterns = [
         name="edit_username",
     ),
     path("edit-profile/", edit_username, name="submit_edit_username"),
-    path("post/create", PostCreate.as_view(), name="post_create"),
+    path("post/create/", PostCreate.as_view(), name="post_create"),
     path(
         "site-policy/privacy/",
         TemplateView.as_view(template_name="privacy.html"),
@@ -49,15 +49,15 @@ urlpatterns = [
     path("api/get_prefixes/", get_prefixes, name="get_prefixes"),
     path("api/get_numbers/", get_numbers, name="get_places"),
     path("api/search_number/", search_numbers, name="search_numbers"),
-    path("posts/<int:pk>/api/delete_post/", delete_posts, name="delete_posts"),
-    path("posts/<int:pk>/api/submit_like/", submit_like, name="submit_like"),
+    path("post/<int:pk>/api/delete_post/", delete_posts, name="delete_posts"),
+    path("post/<int:pk>/api/submit_like/", submit_like, name="submit_like"),
     # Post details
-    path("posts/<int:pk>/", PostDetail.as_view(), name="post_detail"),
+    path("post/<int:pk>/", PostDetail.as_view(), name="post_detail"),
     path(
         "trendy/",
         trendy_posts,
         name="trendy",
     ),
-    path("posts/<int:pk>/api/add_comment/", add_comment, name="add_comment"),
+    path("post/<int:pk>/api/add_comment/", add_comment, name="add_comment"),
     path("post/edit/<int:pk>/", PostUpdateView.as_view(), name="post_update_form"),
 ]
