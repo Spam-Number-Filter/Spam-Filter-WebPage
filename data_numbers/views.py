@@ -283,12 +283,13 @@ def add_comment(request, pk):
     else:
         return redirect("home")
 
+
 def delete_comment(request, pk):
     if request.method == "POST":
         comment_id = request.POST["comment_id"]
         comment = Comment.objects.get(pk=comment_id)
         comment.delete()
-        return redirect("/post/" + str(pk) + '/')
+        return redirect("/post/" + str(pk) + "/")
     else:
         return redirect("home")
 
@@ -309,7 +310,7 @@ def submit_like(request, post_id, user_id):
     post = Post.objects.get(post_id=post_id)
     likes = post.likes.all()
     if remove_if_liked(likes, user_id, post, request):
-        return redirect("/posts/" + str(post_id))
+        return redirect("/post/" + str(post_id) + "/")
     else:
         return add_like(user_id, post_id, post)
 
