@@ -72,10 +72,10 @@
                                     </div>
                                 </div>
                                 {% if user.id == comment.user_id.id %}
-                                    <button style="align-content: end; font-size: 12px; text-align: end; float: right"
-                                            class="btn btn-outline-danger" id="delete"
-                                            onclick="deleteComment( {{ comment.pk }} )">DELETE
-                                        </i> {% csrf_token %}</button>
+                                    <form action="{% url 'delete_comment' comment.pk %}" method=POST>
+                                        {% csrf_token %}
+                                        <button style="align-content: end; font-size: 12px; text-align: end; float: right" class="btn btn-outline-danger" id="delete">DELETE</button>
+                                    </form>
                                 {% endif %}
                                 <br/>
                             {% endfor %}

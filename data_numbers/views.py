@@ -267,29 +267,29 @@ def get_posts(trendy_posts_dict):
     return ten_trendy_posts
 
 
-def add_comment(request, pk):
+def add_comment(request, post_id):
     if request.method == "POST":
         form = CommentForm(request.POST)
         if form.is_valid():
             user = request.user.username
             new_comment = Comment()
-            new_comment.post_id = Post.objects.get(pk=pk)
+            new_comment.post_id = Post.objects.get(pk=post_id)
             new_comment.user_id = User.objects.get(username=user)
             new_comment.message = form.get_message()
             new_comment.save()
         else:
             messages.success(request, form.errors)
-        return redirect("/post/" + str(pk) + "/")
+        return redirect("/post/" + str(post_id) + "/")
     else:
         return redirect("home")
 
 
-def delete_comment(request, pk):
+def delete_comment(request, comment_id):
     if request.method == "POST":
-        comment_id = request.POST["comment_id"]
         comment = Comment.objects.get(pk=comment_id)
+        post = comment.post_id
         comment.delete()
-        return redirect("/post/" + str(pk) + "/")
+        return redirect("/post/" + str(post.post_id) + "/")
     else:
         return redirect("home")
 
