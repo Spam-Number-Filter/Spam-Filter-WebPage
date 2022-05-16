@@ -37,7 +37,7 @@ class ApiNumberValidation(NumberValidation):
     @staticmethod
     def _get_api_string(prefix: int, number: int) -> str:
         api_key_env = os.environ.get("PHONE_API_KEY", "api key is not valid")
-        return f"https://phonevalidation.abstractapi.com/v1/?{api_key_env}&phone=+{prefix}{number}"
+        return f"https://phonevalidation.abstractapi.com/v1/?api_key={api_key_env}&phone=+{prefix}{number}"
 
     def valid_number(self) -> NumberValidationData:
         response: Response = requests.get(self.api_string)
