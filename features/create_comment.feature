@@ -3,14 +3,25 @@ Feature: Create a comment on a post
   As a user
   I want to create a comment in a post
 
-  Background: There is a registered user
-    Given Exists a user "user2" with password "password2"
-    Given Exists a post with post_id "1"
-    And I log in as "user2" with password "password2"
-    And I am on the post "1" page
+  Background: There is a registered user and a post
+    Given Exists a user "user" with password "password"
+    And There is a category "spam"
+    And An user is logged in the website
+    And I am on the create post page
+    When I create a post
+      | title      | message      | telephone_prefix | telephone_number |
+      | Post title | Post message | 47               | 111223344        |
+    And I choose Category "Spam"
+    And I press "Post"
+
 
   Scenario: Create comment
     When I click on the comment
     And I write a comment
-    And i press "Submit"
+      | comment                         |
+      | Sample comment, liked this post |
+    And I press "Submit"
     Then I should see the comment
+      | comment                         |
+      | Sample comment, liked this post |
+    And I should still be on the post page
