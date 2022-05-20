@@ -62,13 +62,13 @@
                                 </form>
                             {% endif %}
                             {% for comment in comments %}
-                                <div class="d-flex" id="comment-div">
+                                <div class="d-flex" id="comment-div" vocab="https://schema.org/" typeof="UserComments">
                                     <div class="flex-shrink-0"><img class="rounded-circle"
                                                                     src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
                                                                     alt="..."/></div>
                                     <div class="ms-3">
-                                        <div class="fw-bold">{{ comment.user_id }}</div>
-                                        {{ comment.message }}
+                                        <div class="fw-bold" property="creator">{{ comment.user_id }}</div>
+                                        <span property="commentText">{{ comment.message }}</span>
                                         {% csrf_token %}
                                     </div>
                                     <div>
