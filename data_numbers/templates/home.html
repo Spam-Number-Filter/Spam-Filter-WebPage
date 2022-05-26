@@ -80,33 +80,34 @@
         }</script>
 {% endblock %}
 {% block content %}
-    <html>
+    <html >
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="author" content="colorlib.com">
+        <meta content="/static/images/background.png" itemprop="image">
 
     </head>
-    <body background="/static/images/background.png">
-    <div class="s01">
-        <form>
-            <fieldset>
-                <legend>Spam Number Filter</legend>
-            </fieldset>
-            <div class="inner-form">
-                <div class="input-field first-wrap">
-                    <input id="TelephoneNumberPrefix" type="text" placeholder="Number prefix here"/>
+        <body itemprop="WebPage" itemscope itemtype="http://schema.org/WebPage">
+        <div class="s01" itemprop="about" background="/static/images/background.png">
+            <form>
+                <fieldset>
+                    <legend>Spam Number Filter</legend>
+                </fieldset>
+                <div class="inner-form">
+                    <div class="input-field first-wrap">
+                        <input id="TelephoneNumberPrefix" type="text" placeholder="Number prefix here"/>
+                    </div>
+                    <div class="input-field second-wrap">
+                        <input id="TelephoneNumberText" type="text" placeholder="Telephone number here"/>
+                    </div>
+                    <div class="input-field third-wrap">
+                        <button id="Search" class="btn-search" onclick="onSearchClick()" type="button">Search</button>
+                    </div>
                 </div>
-                <div class="input-field second-wrap">
-                    <input id="TelephoneNumberText" type="text" placeholder="Telephone number here"/>
-                </div>
-                <div class="input-field third-wrap">
-                    <button id="Search" class="btn-search" onclick="onSearchClick()" type="button">Search</button>
-                </div>
-            </div>
-        </form>
-    </div>
-    </body>
+            </form>
+        </div>
+        </body>
     </html>
 {% endblock %}
