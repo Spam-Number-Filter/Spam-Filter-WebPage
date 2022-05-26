@@ -13,21 +13,23 @@
         <div class="container mt-5" style="color: #d8dce1; " >
             <div class="row">
                 <div class="col-lg-8">
+                    <div itemprop="BlogPosting" itemscope itemtype="https://schema.org/BlogPosting">
                     <!-- Post content-->
                         <!-- Post header-->
                         <header class="mb-4">
                             <!-- Phone number-->
-                            <h1 class="fw-bolder mb-1" style="color: #b7b8ba"> +{{ post.telephone.prefix }} {{ post.telephone.phone }} </h1>
+                            <h1 class="fw-bolder mb-1" style="color: #b7b8ba" itemprop="headline"> +{{ post.telephone.prefix }} {{ post.telephone.phone }} </h1>
                             <!-- Post meta content-->
-                            <div class="text-muted fst-italic mb-2" style="color: #a6afb7">Posted on {{ post.date }} by {{ post.user_id }} </div>
+                            <div class="text-muted fst-italic mb-2" style="color: #a6afb7">Posted on <span itemprop="sdDatePublished"> {{ post.date }} </span> by <span itemprop="publisher">{{ post.user_id }}</span></div>
                             <!-- Post category-->
-                            <a class="badge bg-secondary text-decoration-none link-light" href="#!"> {{ post.category.type }} </a>
+                            <span itemprop="articleSection" class="badge bg-secondary text-decoration-none link-light"> {{ post.category.type }} </span>
                         </header>
                         <div class="card" style="background-color: transparent" >
                             <img src="https://i.imgur.com/Oco4P6B.png" class="card-img-top" alt="Image describing post category" width="30%" height="30%"/>
                             <div class="card-body" style="background-color: #212529">
-                                <h5 class="fw-bold"> {{ post.title }} </h5>
-                                <p class="fs-5 mb-4"> {{ post.message }} </p>
+                                <h5 class="fw-bold" itemprop="abstract"> {{ post.title }} </h5>
+                                    <span class="fs-5 mb-4" itemprop="articleBody"> {{ post.message }} </span>
+                                    {% csrf_token %}
                                     <img src="{{ post.image }}" class="img-fluid" alt="" width="30%" height="30%"/>
                                 {% if user.is_authenticated %}
                                 <form action="{% url 'submit_like' post.post_id user.id %}" method=POST style="margin-bottom: 10px">
@@ -45,6 +47,7 @@
                                 {% endif %}
                             </div>
                         </div>
+                    </div>
 
                 <!-- Comments section-->
                 <section class="mb-5" style="color: #d8dce1; margin-top: 30px;">
