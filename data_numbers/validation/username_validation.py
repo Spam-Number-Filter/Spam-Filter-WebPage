@@ -8,3 +8,6 @@ def valid_username(username: str) -> bool:
     if User.objects.filter(username=username).exists():
         raise ValidationError("Username already exists")
     return True
+
+
+# Define a valid password
